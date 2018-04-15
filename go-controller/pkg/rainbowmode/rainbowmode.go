@@ -89,7 +89,7 @@ type RainbowMode struct {
 	ballInView              bool
 
 	// Config
-	config RainbowConfig
+	Config RainbowConfig
 }
 
 func New(propeller propeller.Interface) *RainbowMode {
@@ -97,7 +97,7 @@ func New(propeller propeller.Interface) *RainbowMode {
 		Propeller:      propeller,
 		joystickEvents: make(chan *joystick.Event),
 		phase:          Rotating,
-		config: RainbowConfig{
+		Config: RainbowConfig{
 			FPS:                   15,
 			RotateSpeed:           16,
 			SlowRotateSpeed:       5,
@@ -126,22 +126,21 @@ func New(propeller propeller.Interface) *RainbowMode {
 			FilterYCoord: false,
 		},
 	}
-	for _, colour := range m.config.Sequence {
-		m.config.Balls[colour] = *rainbow.Balls[colour]
+	for _, colour := range m.Config.Sequence {
+		m.Config.Balls[colour] = *rainbow.Balls[colour]
 	}
 	cfg, err := ioutil.ReadFile("/cfg/rainbow.yaml")
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		err = yaml.Unmarshal(cfg, &m.config)
+		err = yaml.Unmarshal(cfg, &m.Config)
 		if err != nil {
 			fmt.Println(err)
 		}
 	}
 	// Write out the config that we are using.
-	fmt.Printf("Using config: %#v\n", m.config)
-	cfgBytes, err := yaml.Marshal(&m.config)
-	//fmt.Printf("Marshalled: %#v\n", cfgBytes)
+	fmt.Printf("Using config: %#v\n", m.Config)
+	cfgBytes, err := yaml.Marshal(&m.Config)
 	if err != nil {
 		fmt.Println(err)
 	} else {
@@ -236,10 +235,10 @@ func clamp(v float64, limit float64) int8 {
 }
 
 func (m *RainbowMode) setSpeeds(forwards, sideways, rotation float64) {
-	fl := clamp(forwards-sideways-rotation, m.config.LimitSpeed)
-	fr := clamp(forwards+sideways+rotation, m.config.LimitSpeed)
-	bl := clamp(forwards+sideways-rotation, m.config.LimitSpeed)
-	br := clamp(forwards-sideways+rotation, m.config.LimitSpeed)
+	fl := clamp(forwards-sideways-rotation, m.Config.LimitSpeed)
+	fr := clamp(forwards+sideways+rotation, m.Config.LimitSpeed)
+	bl := clamp(forwards+sideways-rotation, m.Config.LimitSpeed)
+	br := clamp(forwards-sideways+rotation, m.Config.LimitSpeed)
 
 	fmt.Printf("Speeds: FL=%d FR=%d BL=%d BR=%d\n", fl, fr, bl, br)
 	m.Propeller.SetMotorSpeeds(fl, fr, bl, br)
@@ -327,7 +326,7 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 	defer webcam.Close()
 
 	// Capture 15 frames per second.
-	webcam.Set(gocv.VideoCaptureFPS, float64(m.config.FPS))
+	webcam.Set(gocv.VideoCaptureFPS, float64(m.Config.FPS))
 
 	img := gocv.NewMat()
 	defer img.Close()
@@ -335,7 +334,7 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 	startTime := time.Now()
 
 	m.reset()
-	fmt.Println("Next target ball: ", m.config.Sequence[m.targetBallIdx])
+	fmt.Println("Next target ball: ", m.Config.Sequence[m.targetBallIdx])
 
 	defer fmt.Println("Exiting sequence loop")
 
@@ -344,7 +343,7 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 		numFramesRead int
 	)
 
-	for m.targetBallIdx < len(m.config.Sequence) && ctx.Err() == nil {
+	for m.targetBallIdx < len(m.Config.Sequence) && ctx.Err() == nil {
 		for atomic.LoadInt32(&m.paused) == 1 && ctx.Err() == nil {
 			m.Propeller.SetMotorSpeeds(0, 0, 0, 0)
 			time.Sleep(100 * time.Millisecond)
@@ -352,7 +351,7 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 
 		if numFramesRead > 0 {
 			timeSinceLastFrame := time.Since(lastFrameTime)
-			skipFrames := int64(timeSinceLastFrame) / (int64(time.Second) / int64(m.config.FPS))
+			skipFrames := int64(timeSinceLastFrame) / (int64(time.Second) / int64(m.Config.FPS))
 			if skipFrames > 0 {
 				fmt.Printf("Skipping %v frames\n", skipFrames)
 				webcam.Grab(int(skipFrames))
@@ -367,7 +366,7 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 		}
 		thisFrameTime := time.Now()
 		codeTime := time.Since(lastFrameTime)
-		if int64(codeTime) < int64(time.Second)/int64(m.config.FPS+1) {
+		if int64(codeTime) < int64(time.Second)/int64(m.Config.FPS+1) {
 			fmt.Printf("Code running too fast: %v\n", codeTime)
 		}
 		lastFrameTime = thisFrameTime
@@ -379,12 +378,12 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 			continue
 		}
 
-		m.targetColour = m.config.Sequence[m.targetBallIdx]
+		m.targetColour = m.Config.Sequence[m.targetBallIdx]
 		m.processImage(img, forward)
 
 		// Don't do anything for the first second, to allow the code to synchronize with the
 		// camera frame rate.
-		if numFramesRead <= m.config.FPS {
+		if numFramesRead <= m.Config.FPS {
 			continue
 		}
 
@@ -393,9 +392,9 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 		if m.phase == Reversing {
 			fmt.Println("Target:", m.targetColour, "Reversing")
 
-			farEnough := forward.BestGuess() > m.config.ForwardReverseThreshold ||
-				forwardRight.BestGuess() > m.config.ForwardReverseThreshold ||
-				forwardLeft.BestGuess() > m.config.ForwardReverseThreshold
+			farEnough := forward.BestGuess() > m.Config.ForwardReverseThreshold ||
+				forwardRight.BestGuess() > m.Config.ForwardReverseThreshold ||
+				forwardLeft.BestGuess() > m.Config.ForwardReverseThreshold
 
 			if farEnough {
 				fmt.Println("Far enough away from wall, stopping reversing")
@@ -413,9 +412,9 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 			if !m.roughDirectionKnown() {
 				// Continue rotating.
 				if m.ballInView {
-					m.setSpeeds(0, 0, m.config.SlowRotateSpeed)
+					m.setSpeeds(0, 0, m.Config.SlowRotateSpeed)
 				} else {
-					m.setSpeeds(0, 0, m.config.RotateSpeed)
+					m.setSpeeds(0, 0, m.Config.RotateSpeed)
 				}
 				continue
 			}
@@ -427,13 +426,13 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 		if m.phase == Advancing {
 			fmt.Println("Target:", m.targetColour, "Advancing")
 
-			closeEnough := !forward.IsFar() && forward.BestGuess() <= m.config.ForwardCornerDetectionThreshold &&
-				!forwardRight.IsFar() && forwardRight.BestGuess() <= m.config.ForwardLRCornerDetectionThreshold &&
-				!forwardLeft.IsFar() && forwardLeft.BestGuess() <= m.config.ForwardLRCornerDetectionThreshold
+			closeEnough := !forward.IsFar() && forward.BestGuess() <= m.Config.ForwardCornerDetectionThreshold &&
+				!forwardRight.IsFar() && forwardRight.BestGuess() <= m.Config.ForwardLRCornerDetectionThreshold &&
+				!forwardLeft.IsFar() && forwardLeft.BestGuess() <= m.Config.ForwardLRCornerDetectionThreshold
 
-			closeEnoughToSlowDown := !forward.IsFar() && forward.BestGuess() <= m.config.ForwardCornerDetectionThreshold+m.config.CornerSlowDownThresh ||
-				!forwardRight.IsFar() && forwardRight.BestGuess() <= m.config.ForwardLRCornerDetectionThreshold+m.config.CornerSlowDownThresh ||
-				!forwardLeft.IsFar() && forwardLeft.BestGuess() <= m.config.ForwardLRCornerDetectionThreshold+m.config.CornerSlowDownThresh
+			closeEnoughToSlowDown := !forward.IsFar() && forward.BestGuess() <= m.Config.ForwardCornerDetectionThreshold+m.Config.CornerSlowDownThresh ||
+				!forwardRight.IsFar() && forwardRight.BestGuess() <= m.Config.ForwardLRCornerDetectionThreshold+m.Config.CornerSlowDownThresh ||
+				!forwardLeft.IsFar() && forwardLeft.BestGuess() <= m.Config.ForwardLRCornerDetectionThreshold+m.Config.CornerSlowDownThresh
 
 			if m.ballFixed && !closeEnough {
 				// We're approaching the ball but not yet close enough.
@@ -441,9 +440,9 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 				rotation := m.getDirectionAdjust()
 				if closeEnoughToSlowDown {
 					fmt.Println("Slowing...")
-					m.setSpeeds(m.config.ForwardSlowSpeed, sideways, rotation)
+					m.setSpeeds(m.Config.ForwardSlowSpeed, sideways, rotation)
 				} else {
-					m.setSpeeds(m.config.ForwardSpeed, sideways, rotation)
+					m.setSpeeds(m.Config.ForwardSpeed, sideways, rotation)
 				}
 				continue
 			} else {
@@ -452,7 +451,7 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 				m.phase = Reversing
 				m.advanceDuration = time.Since(m.advanceReverseStartTime)
 				m.advanceReverseStartTime = time.Now()
-				m.setSpeeds(-m.config.ForwardSpeed, 0, 0)
+				m.setSpeeds(-m.Config.ForwardSpeed, 0, 0)
 				if !m.ballFixed {
 					// We haven't found the current ball yet.
 					continue
@@ -463,8 +462,8 @@ func (m *RainbowMode) runSequence(ctx context.Context) {
 
 		fmt.Println("Reached target ball:", m.targetColour, "in", time.Since(startTime))
 		m.targetBallIdx++
-		if m.targetBallIdx < len(m.config.Sequence) {
-			fmt.Println("Next target ball: ", m.config.Sequence[m.targetBallIdx])
+		if m.targetBallIdx < len(m.Config.Sequence) {
+			fmt.Println("Next target ball: ", m.Config.Sequence[m.targetBallIdx])
 		} else {
 			fmt.Println("Done!!")
 		}
@@ -499,28 +498,28 @@ func (m *RainbowMode) processImage(img gocv.Mat, distanceSensor *Filter) {
 	hsv := gocv.NewMat()
 	defer hsv.Close()
 	gocv.CvtColor(img, hsv, gocv.ColorBGRToHSV)
-	hsvRange := m.config.Balls[m.targetColour]
+	hsvRange := m.Config.Balls[m.targetColour]
 	pos, err := rainbow.FindBallPosition(hsv, &hsvRange)
 	if err == nil {
 		fmt.Printf("Found at %#v\n", pos)
 		m.ballX = pos.X
 		m.perceivedSize = pos.Radius
-		if m.ballX >= (m.config.XStraightAhead-m.config.XPlusOrMinus) && m.ballX <= (m.config.XStraightAhead+m.config.XPlusOrMinus) {
+		if m.ballX >= (m.Config.XStraightAhead-m.Config.XPlusOrMinus) && m.ballX <= (m.Config.XStraightAhead+m.Config.XPlusOrMinus) {
 			fmt.Println("Ball seen roughly ahead")
 			m.roughDirectionCount++
 			m.ballFixed = true
 			if !distanceSensor.IsFar() {
 				distanceMM := distanceSensor.BestGuess()
-				yMin := int(240 * (1 - float64(m.config.DeltaHMaxMM)/(float64(distanceMM)*m.config.TanTheta)))
-				yMax := int(240 * (1 - float64(m.config.DeltaHMinMM)/(float64(distanceMM)*m.config.TanTheta)))
+				yMin := int(240 * (1 - float64(m.Config.DeltaHMaxMM)/(float64(distanceMM)*m.Config.TanTheta)))
+				yMax := int(240 * (1 - float64(m.Config.DeltaHMinMM)/(float64(distanceMM)*m.Config.TanTheta)))
 				if pos.Y < yMin {
 					fmt.Printf("Ball above expected Y range: %v < %v\n", pos.Y, yMin)
-					if m.config.FilterYCoord {
+					if m.Config.FilterYCoord {
 						m.ballFixed = false
 					}
 				} else if pos.Y > yMax {
 					fmt.Printf("Ball below expected Y range: %v > %v\n", pos.Y, yMax)
-					if m.config.FilterYCoord {
+					if m.Config.FilterYCoord {
 						m.ballFixed = false
 					}
 				} else {
@@ -546,7 +545,7 @@ func (m *RainbowMode) nowCloseEnough() bool {
 }
 
 func (m *RainbowMode) getDirectionAdjust() float64 {
-	return m.config.DirectionAdjustFactor * float64(m.config.XStraightAhead-m.ballX)
+	return m.Config.DirectionAdjustFactor * float64(m.Config.XStraightAhead-m.ballX)
 }
 
 func (m *RainbowMode) getTOFDifference() float64 {

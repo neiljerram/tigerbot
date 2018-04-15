@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/tigerbot-team/tigerbot/go-controller/pkg/rainbow"
+	"github.com/tigerbot-team/tigerbot/go-controller/pkg/rainbowmode"
 	"gocv.io/x/gocv"
 )
 
@@ -94,23 +95,36 @@ func loopReadingCamera() {
 func analyzeFile(filename string) {
 	// Read that file (as BGR).
 	img := gocv.IMRead(filename, gocv.IMReadColor)
+	defer img.Close()
 
-	// Convert to HSV and Resize to a width of 600.
-	hsv := rainbow.ScaleAndConvertToHSV(img, 600)
+	w := img.Cols()
+	h := img.Rows()
+	var hsv gocv.Mat
+	if w != 640 || h != 480 {
+		fmt.Printf("Read image %v x %v\n", img.Cols(), img.Rows())
+		// Convert to HSV and Resize to a width of 600.
+		hsv = rainbow.ScaleAndConvertToHSV(img, 600)
+		// Also scale the original image, for easier and nicer display
+		// of the result.
+		fmt.Printf("Input size = %v x %v\n", img.Cols(), img.Rows())
+		scaleFactor := float64(600) / float64(w)
+		fmt.Printf("Scaling by %v\n", scaleFactor)
+		gocv.Resize(img, img, image.Point{}, scaleFactor, scaleFactor, gocv.InterpolationLinear)
+		fmt.Printf("Scaled size = %v x %v\n", img.Cols(), img.Rows())
+	} else {
+		// Convert to HSV at existing size.
+		hsv = gocv.NewMat()
+		gocv.CvtColor(img, hsv, gocv.ColorBGRToHSV)
+	}
+	defer hsv.Close()
 
-	// Also scale the original image, for easier and nicer display
-	// of the result.
-	fmt.Printf("Input size = %v x %v\n", img.Cols(), img.Rows())
-	width := img.Cols()
-	scaleFactor := float64(600) / float64(width)
-	fmt.Printf("Scaling by %v\n", scaleFactor)
-	gocv.Resize(img, img, image.Point{}, scaleFactor, scaleFactor, gocv.InterpolationLinear)
-	fmt.Printf("Scaled size = %v x %v\n", img.Cols(), img.Rows())
+	// Construct a RainbowMode, so we can use its config setup.
+	m := rainbowmode.New(&mockPropeller{})
 
 	// Try to find balls.
-	for color, hsvRange := range rainbow.Balls {
+	for color, hsvRange := range m.Config.Balls {
 		fmt.Printf("Looking for %v ball...\n", color)
-		if pos, err := rainbow.FindBallPosition(hsv, hsvRange); err == nil {
+		if pos, err := rainbow.FindBallPosition(hsv, &hsvRange); err == nil {
 			fmt.Printf("Found at %#v\n", pos)
 			rainbow.MarkBallPosition(img, pos)
 		} else {
@@ -128,4 +142,14 @@ func analyzeFile(filename string) {
 			break
 		}
 	}
+}
+
+type mockPropeller struct{}
+
+func (p *mockPropeller) SetMotorSpeeds(frontLeft, frontRight, backLeft, backRight int8) error {
+	return nil
+}
+
+func (p *mockPropeller) SetServo(n int, value uint8) error {
+	return nil
 }

@@ -66,12 +66,7 @@ gocv-dev-image: $(ARCH_DEPS)
 	docker build -f go-controller/Dockerfile-dev -t $(GOCV_DEV_IMAGE) .
 
 go-controller/cvtest: go-controller/cvtest.go
-	sudo docker run --rm \
-	    -v /root/.cache:/root/.cache \
-	    -v `pwd`:$(TIGERBOT) \
-	    -w $(TIGERBOT)/go-controller \
-	    $(GOCV_DEV_IMAGE) \
-	    bash -c "source $(GOCV)/env.sh && GOMAXPROCS=1 go build -p 1 -v cvtest.go"
+	docker build -f go-controller/cvtest.Dockerfile -t tigerbot/go-controller-cvtest:latest .
 
 run-cvtest: go-controller/cvtest
 	sudo modprobe bcm2835-v4l2
