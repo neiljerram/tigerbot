@@ -77,6 +77,7 @@ run-cvtest: go-controller/cvtest
 	sudo modprobe bcm2835-v4l2
 	docker run --rm -it \
 	    --net=host \
+	    -v `pwd`/cfg:/cfg --privileged \
 	    -v /dev:/dev --privileged \
 	    -v /home/pi/.Xauthority:/.Xauthority -e XAUTHORITY=/.Xauthority \
 	    -e DISPLAY=127.0.0.1:10.0 -v /tmp/.X11-unix:/tmp/.X11-unix \

@@ -1,0 +1,3092 @@
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot$ pwd
+/home/neil/go/src/github.com/tigerbot-team/tigerbot
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot$ cd go-controller/
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot/go-controller$
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot/go-controller$
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot/go-controller$
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot/go-controller$ pwd
+/home/neil/go/src/github.com/tigerbot-team/tigerbot/go-controller
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot/go-controller$ ls
+controller     copy-libs  Dockerfile-dev  glide.yaml          phase-2.Dockerfile  runme.sh
+controller.go  cvtest.go  glide.lock      phase-1.Dockerfile  pkg                 vendor
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot/go-controller$ glide get gopkg.in/yaml.v2
+[INFO]	Preparing to install 1 package.
+[INFO]	Attempting to get package gopkg.in/yaml.v2
+[INFO]	--> Gathering release information for gopkg.in/yaml.v2
+[INFO]	The package gopkg.in/yaml.v2 appears to have Semantic Version releases (http://semver.org).
+[INFO]	The latest release is v2.2.1. You are currently not using a release. Would you like
+[INFO]	to use this release? Yes (Y) or No (N)
+Y
+[INFO]	The package gopkg.in/yaml.v2 appears to use semantic versions (http://semver.org).
+[INFO]	Would you like to track the latest minor or patch releases (major.minor.patch)?
+[INFO]	Tracking minor version releases would use '>= 2.2.1, < 3.0.0' ('^2.2.1'). Tracking patch version
+[INFO]	releases would use '>= 2.2.1, < 2.3.0' ('~2.2.1'). For more information on Glide versions
+[INFO]	and ranges see https://glide.sh/docs/versions
+[INFO]	Minor (M), Patch (P), or Skip Ranges (S)?
+M
+[INFO]	--> Adding gopkg.in/yaml.v2 to your configuration with the version ^2.2.1
+[INFO]	Downloading dependencies. Please wait...
+[INFO]	--> Fetching updates for gopkg.in/yaml.v2.
+[INFO]	--> Fetching golang.org/x/exp.
+[INFO]	--> Fetching github.com/kr/pty.
+[INFO]	--> Fetching gocv.io/x/gocv.
+[INFO]	Resolving imports
+[INFO]	--> Setting version for golang.org/x/exp to 072991165226c11c888c881218850e8318c2b32e.
+[INFO]	Downloading dependencies. Please wait...
+[INFO]	--> Detected semantic version. Setting version for github.com/kr/pty to v1.1.1.
+[INFO]	--> Detected semantic version. Setting version for gopkg.in/yaml.v2 to v2.2.1.
+[INFO]	--> Detected semantic version. Setting version for gocv.io/x/gocv to v0.9.0.
+[INFO]	Exporting resolved dependencies...
+[INFO]	--> Exporting github.com/kr/pty
+[INFO]	--> Exporting golang.org/x/exp
+[INFO]	--> Exporting gopkg.in/yaml.v2
+[INFO]	--> Exporting gocv.io/x/gocv
+[INFO]	Replacing existing vendor dependencies
+neil@smaug:~/go/src/github.com/tigerbot-team/tigerbot/go-controller$ cd
+neil@smaug:~$ docker run --rm --privileged -ti -v `pwd`/controller:/controller -v `pwd`/mb3.binary:/mb3.binary -v /dev:/dev -v/tmp:/tmp -v `pwd`/cfg:/cfg tigerbot/go-controller
+Unable to find image 'tigerbot/go-controller:latest' locally
+docker: Error response from daemon: manifest for tigerbot/go-controller:latest not found.
+See 'docker run --help'.
+neil@smaug:~$ ssh pi@192.168.1.114
+Linux tigerbot 4.9.80-v7+ #1098 SMP Fri Mar 9 19:11:42 GMT 2018 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Apr 15 18:49:57 2018 from 192.168.1.117
+pi@tigerbot:~$ docker run --rm --privileged -ti -v `pwd`/controller:/controller -v `pwd`/mb3.binary:/mb3.binary -v /dev:/dev -v/tmp:/tmp -v `pwd`/cfg:/cfg tigerbot/go-controller
+---- Tigerbot ----
+
+GOMAXPROCS 4
+Opened joystick
+Flashing the propeller
+Event from joystick: button(0)=0
+propman output:
+pm.device.gpio: Failed to write export
+pm.loader: [ttyAMA0] Preparing image...
+pm.loader: [ttyAMA0] Downloading to RAM...
+pm.loader: [ttyAMA0] Verifying RAM...
+pm.loader: [ttyAMA0] Success!
+Flashed the propeller
+Taking control of propeller reset pin
+Setting propeller reset pin high (i.e. don't reset)
+Zeroing motors
+Using config: rainbowmode.RainbowConfig{FPS:15, RotateSpeed:15, SlowRotateSpeed:5, LimitSpeed:80, ForwardSpeed:15, XStraightAhead:320, XPlusOrMinus:80, DirectionAdjustFactor:0.03, CloseEnoughSize:150, Sequence:[]string{"red", "blue", "yellow", "green"}, Balls:map[string]rainbow.HSVRange{"red":rainbow.HSVRange{HueMin:0xa5, HueMax:0xa, SatMin:0x64, SatMax:0xff, ValMin:0x3c, ValMax:0xff}, "blue":rainbow.HSVRange{HueMin:0x64, HueMax:0x78, SatMin:0x5a, SatMax:0xfe, ValMin:0x50, ValMax:0xff}, "yellow":rainbow.HSVRange{HueMin:0x16, HueMax:0x2a, SatMin:0x64, SatMax:0xfe, ValMin:0x82, ValMax:0xff}, "green":rainbow.HSVRange{HueMin:0x2d, HueMax:0x64, SatMin:0xa, SatMax:0xfe, ValMin:0x0, ValMax:0xff}}, DeltaHMinMM:-28, DeltaHMaxMM:17, TanTheta:0.177, FilterYCoord:false}
+Marshalled: []byte{0x66, 0x70, 0x73, 0x3a, 0x20, 0x31, 0x35, 0xa, 0x72, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x73, 0x70, 0x65, 0x65, 0x64, 0x3a, 0x20, 0x31, 0x35, 0xa, 0x73, 0x6c, 0x6f, 0x77, 0x72, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x73, 0x70, 0x65, 0x65, 0x64, 0x3a, 0x20, 0x35, 0xa, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x70, 0x65, 0x65, 0x64, 0x3a, 0x20, 0x38, 0x30, 0xa, 0x66, 0x6f, 0x72, 0x77, 0x61, 0x72, 0x64, 0x73, 0x70, 0x65, 0x65, 0x64, 0x3a, 0x20, 0x31, 0x35, 0xa, 0x78, 0x73, 0x74, 0x72, 0x61, 0x69, 0x67, 0x68, 0x74, 0x61, 0x68, 0x65, 0x61, 0x64, 0x3a, 0x20, 0x33, 0x32, 0x30, 0xa, 0x78, 0x70, 0x6c, 0x75, 0x73, 0x6f, 0x72, 0x6d, 0x69, 0x6e, 0x75, 0x73, 0x3a, 0x20, 0x38, 0x30, 0xa, 0x64, 0x69, 0x72, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x64, 0x6a, 0x75, 0x73, 0x74, 0x66, 0x61, 0x63, 0x74, 0x6f, 0x72, 0x3a, 0x20, 0x30, 0x2e, 0x30, 0x33, 0xa, 0x63, 0x6c, 0x6f, 0x73, 0x65, 0x65, 0x6e, 0x6f, 0x75, 0x67, 0x68, 0x73, 0x69, 0x7a, 0x65, 0x3a, 0x20, 0x31, 0x35, 0x30, 0xa, 0x73, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x3a, 0xa, 0x2d, 0x20, 0x72, 0x65, 0x64, 0xa, 0x2d, 0x20, 0x62, 0x6c, 0x75, 0x65, 0xa, 0x2d, 0x20, 0x79, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0xa, 0x2d, 0x20, 0x67, 0x72, 0x65, 0x65, 0x6e, 0xa, 0x62, 0x61, 0x6c, 0x6c, 0x73, 0x3a, 0xa, 0x20, 0x20, 0x62, 0x6c, 0x75, 0x65, 0x3a, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x31, 0x30, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x31, 0x32, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x39, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x34, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x38, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x35, 0xa, 0x20, 0x20, 0x67, 0x72, 0x65, 0x65, 0x6e, 0x3a, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x34, 0x35, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x31, 0x30, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x31, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x34, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x35, 0xa, 0x20, 0x20, 0x72, 0x65, 0x64, 0x3a, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x31, 0x36, 0x35, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x31, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x31, 0x30, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x35, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x36, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x35, 0xa, 0x20, 0x20, 0x79, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x3a, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x32, 0x32, 0xa, 0x20, 0x20, 0x20, 0x20, 0x68, 0x75, 0x65, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x34, 0x32, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x31, 0x30, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x73, 0x61, 0x74, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x34, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x69, 0x6e, 0x3a, 0x20, 0x31, 0x33, 0x30, 0xa, 0x20, 0x20, 0x20, 0x20, 0x76, 0x61, 0x6c, 0x6d, 0x61, 0x78, 0x3a, 0x20, 0x32, 0x35, 0x35, 0xa, 0x64, 0x65, 0x6c, 0x74, 0x61, 0x68, 0x6d, 0x69, 0x6e, 0x6d, 0x6d, 0x3a, 0x20, 0x2d, 0x32, 0x38, 0xa, 0x64, 0x65, 0x6c, 0x74, 0x61, 0x68, 0x6d, 0x61, 0x78, 0x6d, 0x6d, 0x3a, 0x20, 0x31, 0x37, 0xa, 0x74, 0x61, 0x6e, 0x74, 0x68, 0x65, 0x74, 0x61, 0x3a, 0x20, 0x30, 0x2e, 0x31, 0x37, 0x37, 0xa, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x79, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x3a, 0x20, 0x66, 0x61, 0x6c, 0x73, 0x65, 0xa}
+----- Golf mode -----
+ServoController loop started
+Setting pitch: 127
+Setting servo 3 to 127
+Event from joystick: button(1)=0
+Event from joystick: button(2)=0
+Setting servo 4 to 128
+Event from joystick: button(3)=0
+Event from joystick: button(4)=0
+Event from joystick: button(5)=0
+Event from joystick: button(6)=0
+Event from joystick: button(7)=0
+Aggressive mode
+Event from joystick: button(8)=0
+Event from joystick: button(9)=0
+Event from joystick: button(10)=0
+Event from joystick: button(11)=0
+Event from joystick: button(12)=0
+Event from joystick: button(13)=0
+Event from joystick: axis(0)=0
+Event from joystick: axis(1)=0
+Event from joystick: axis(2)=0
+Event from joystick: axis(3)=-32767
+Event from joystick: axis(4)=-32767
+Event from joystick: axis(5)=0
+Event from joystick: axis(6)=0
+Event from joystick: axis(7)=0
+Event from joystick: button(6)=1
+Gentle mode
+Event from joystick: axis(3)=-31755
+Event from joystick: axis(3)=-30404
+Event from joystick: axis(3)=-29728
+Event from joystick: axis(3)=-27363
+Event from joystick: axis(3)=-25674
+Event from joystick: axis(3)=-23648
+Event from joystick: axis(3)=-22634
+Event from joystick: axis(3)=-21283
+Event from joystick: axis(3)=-19932
+Event from joystick: axis(3)=-18918
+Event from joystick: axis(3)=-17567
+Event from joystick: axis(3)=32767
+Event from joystick: axis(5)=2364
+Event from joystick: axis(5)=2702
+Event from joystick: axis(5)=3040
+Event from joystick: axis(5)=3378
+Event from joystick: axis(5)=7431
+Event from joystick: axis(5)=8107
+Event from joystick: axis(5)=8445
+Event from joystick: axis(5)=8107
+Event from joystick: axis(5)=9120
+Event from joystick: axis(5)=9458
+Event from joystick: axis(5)=9796
+Event from joystick: axis(5)=10134
+Event from joystick: axis(5)=12161
+Event from joystick: axis(5)=12499
+Event from joystick: axis(5)=14863
+Event from joystick: axis(5)=15201
+Event from joystick: axis(5)=14863
+Event from joystick: axis(5)=15201
+Event from joystick: axis(5)=14863
+Event from joystick: axis(2)=337
+Event from joystick: axis(5)=16552
+Event from joystick: axis(5)=16215
+Event from joystick: axis(2)=1013
+Event from joystick: axis(5)=18917
+Event from joystick: axis(2)=675
+Event from joystick: axis(2)=1013
+Event from joystick: axis(5)=19255
+Event from joystick: axis(5)=18917
+Event from joystick: axis(2)=675
+Event from joystick: axis(5)=19255
+Event from joystick: axis(2)=1013
+Event from joystick: axis(5)=18917
+Event from joystick: axis(2)=675
+Event from joystick: axis(5)=19255
+Event from joystick: axis(2)=1013
+Event from joystick: axis(2)=1689
+Event from joystick: axis(5)=20606
+Event from joystick: axis(2)=1351
+Event from joystick: axis(2)=1689
+Event from joystick: axis(2)=1351
+Event from joystick: axis(2)=1689
+Event from joystick: axis(2)=2026
+Event from joystick: axis(5)=20268
+Event from joystick: axis(2)=1689
+Event from joystick: axis(2)=1351
+Event from joystick: axis(5)=20606
+Event from joystick: axis(2)=1689
+Event from joystick: axis(5)=20944
+Event from joystick: axis(2)=2026
+Event from joystick: axis(5)=20268
+Event from joystick: axis(2)=1689
+Event from joystick: axis(5)=20606
+Event from joystick: axis(2)=2026
+Event from joystick: axis(5)=20268
+Event from joystick: axis(2)=1689
+Event from joystick: axis(5)=20606
+Event from joystick: axis(5)=20268
+Event from joystick: axis(2)=2026
+Event from joystick: axis(2)=1689
+Event from joystick: axis(5)=20606
+Event from joystick: axis(2)=2026
+Event from joystick: axis(5)=20268
+Event from joystick: axis(2)=1689
+Event from joystick: axis(5)=20606
+Event from joystick: axis(2)=2026
+Event from joystick: axis(5)=20268
+Event from joystick: axis(5)=20606
+Event from joystick: axis(2)=1689
+Event from joystick: axis(2)=2026
+Event from joystick: axis(2)=1689
+Event from joystick: axis(2)=2026
+Event from joystick: axis(2)=1689
+Event from joystick: axis(5)=20268
+Event from joystick: axis(5)=21620
+Event from joystick: axis(2)=2026
+Event from joystick: axis(2)=1689
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=22295
+Event from joystick: axis(5)=22633
+Event from joystick: axis(5)=22295
+Event from joystick: axis(5)=22633
+Event from joystick: axis(2)=2026
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=22971
+Event from joystick: axis(5)=22633
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=22971
+Event from joystick: axis(5)=23309
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=22971
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23309
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24660
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24660
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2026
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=24322
+Event from joystick: axis(5)=23984
+Event from joystick: axis(2)=2364
+Event from joystick: axis(2)=2702
+Event from joystick: axis(2)=2364
+Event from joystick: axis(5)=24322
+Event from joystick: axis(2)=2702
+Event from joystick: axis(5)=26011
+Event from joystick: axis(5)=25673
+Event from joystick: axis(5)=26011
+Event from joystick: axis(5)=25673
+Event from joystick: axis(5)=26011
+Event from joystick: axis(2)=3040
+Event from joystick: axis(2)=3378
+Event from joystick: axis(5)=25673
+Event from joystick: axis(2)=3040
+Event from joystick: axis(5)=26011
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=3378
+Event from joystick: axis(5)=25673
+Event from joystick: axis(2)=3715
+Event from joystick: axis(5)=26011
+Event from joystick: axis(2)=3378
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=3378
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=3378
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=3378
+Event from joystick: axis(2)=3715
+Event from joystick: axis(5)=26349
+Event from joystick: axis(2)=3378
+Event from joystick: axis(5)=26011
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=3378
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=3378
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=4053
+Event from joystick: axis(5)=25673
+Event from joystick: axis(2)=3378
+Event from joystick: axis(5)=26011
+Event from joystick: axis(2)=3715
+Event from joystick: axis(5)=25673
+Event from joystick: axis(2)=3378
+Event from joystick: axis(5)=26011
+Event from joystick: axis(2)=3715
+Event from joystick: axis(2)=1013
+Event from joystick: axis(5)=8107
+Event from joystick: axis(5)=6756
+Event from joystick: axis(2)=675
+Event from joystick: axis(5)=5405
+Event from joystick: axis(2)=337
+Event from joystick: axis(5)=3378
+Event from joystick: axis(2)=0
+Event from joystick: axis(5)=2026
+Event from joystick: axis(5)=0
+Event from joystick: axis(3)=0
+Event from joystick: axis(3)=-676
+Event from joystick: axis(3)=-3379
+Event from joystick: axis(3)=-6419
+Event from joystick: axis(3)=-11824
+Event from joystick: axis(3)=-14189
+Event from joystick: axis(3)=-18918
+Event from joystick: axis(3)=-24323
+Event from joystick: axis(3)=-29390
+Event from joystick: axis(3)=-32767
+Event from joystick: button(6)=0
+Aggressive mode
+Event from joystick: button(6)=1
+Event from joystick: axis(3)=-9121
+Gentle mode
+Event from joystick: axis(3)=-6757
+Event from joystick: axis(3)=-4054
+Event from joystick: axis(3)=-2027
+Event from joystick: axis(3)=0
+Event from joystick: axis(3)=1689
+Event from joystick: axis(3)=3715
+Event from joystick: axis(3)=32767
+Event from joystick: axis(5)=337
+Event from joystick: axis(5)=675
+Event from joystick: axis(5)=1013
+Event from joystick: axis(5)=1351
+Event from joystick: axis(5)=1689
+Event from joystick: axis(5)=2026
+Event from joystick: axis(5)=3040
+Event from joystick: axis(5)=3378
+Event from joystick: axis(5)=3040
+Event from joystick: axis(5)=2702
+Event from joystick: axis(5)=2364
+Event from joystick: axis(5)=2026
+Event from joystick: axis(5)=1013
+Event from joystick: axis(5)=0
+Event from joystick: axis(5)=337
+Event from joystick: axis(5)=1351
+Event from joystick: axis(5)=1689
+Event from joystick: axis(5)=2364
+Event from joystick: axis(5)=3040
+Event from joystick: axis(5)=3378
+Event from joystick: axis(5)=3715
+Event from joystick: axis(5)=4391
+Event from joystick: axis(2)=337
+Event from joystick: axis(5)=14526
+Event from joystick: axis(2)=0
+Event from joystick: axis(2)=337
+Event from joystick: axis(2)=0
+Event from joystick: axis(2)=337
+Event from joystick: axis(2)=0
+Event from joystick: axis(2)=337
+Event from joystick: axis(2)=0
+Event from joystick: axis(5)=0
+Event from joystick: axis(3)=23309
+Event from joystick: axis(3)=21957
+Event from joystick: axis(3)=20268
+Event from joystick: axis(3)=17904
+Event from joystick: axis(3)=15539
+Event from joystick: axis(3)=13174
+Event from joystick: axis(3)=11485
+Event from joystick: axis(3)=9120
+Event from joystick: axis(3)=7769
+Event from joystick: axis(3)=-31417
+Event from joystick: axis(3)=-32431
+Event from joystick: axis(3)=-32767
+Event from joystick: button(6)=0
+Aggressive mode
+Event from joystick: button(9)=1
+Options pressed: switching modes >>
+ServoController loop stopping
+----- Duck shoot mode -----
+ServoController loop started
+Setting pitch: 127
+Setting servo 4 to 127
+Setting servo 1 to 0
+Setting servo 2 to 0
+Setting servo 3 to 0
+Event from joystick: button(9)=0
+Event from joystick: button(9)=1
+Options pressed: switching modes >>
+ServoController loop stopping
+Cancelling fire control loop
+Fire control loop stopping
+Resetting servos
+Setting servo 1 to 0
+Setting servo 2 to 0
+Setting servo 3 to 0
+Done resetting servos
+Fire control loop done
+Fire control loop done reported
+Fire control loop stopped
+----- Maze mode -----
+Event from joystick: button(9)=0
+Event from joystick: button(9)=1
+Options pressed: switching modes >>
+Tunable: Turn entry threshold = 130
+Tunable: Turn same side front offset = -7
+Tunable: Turn opp side front offset = 14
+Tunable: Turn same side rear offset = -2
+Tunable: Turn opp side rear offset = 6
+Tunable: Corner sensor offset = -12
+Tunable: Corner sensor angle offset = -8
+Tunable: Clearance return factor = 90
+Tunable: Turn exit threshold = 170
+Tunable: Turn exit ratio threshold = 180
+Tunable: Front distance speed up thresh = 350
+Tunable: Corner distance speed up thresh = 80
+Tunable: Base speed = 35
+Tunable: Top speed = 80
+Tunable: Speed ramp up  = 6
+Tunable: Speed ramp down = 10
+----- SLST mode -----
+Event from joystick: button(9)=0
+Event from joystick: button(9)=1
+Options pressed: switching modes >>
+Tunable: Corner sensor offset = -12
+Tunable: Corner sensor angle offset = -8
+Tunable: Clearance return factor = 90
+Tunable: Front distance stop threshold = 200
+Tunable: Corner distance speed up thresh = 70
+Tunable: Base speed = 35
+Tunable: Top speed = 127
+Tunable: Speed ramp up  = 3
+Tunable: Speed ramp down = 2
+Tunable: Translation Kp (thousandths) = 330
+Tunable: Translation Ki (ten-thousandths) = 120
+Tunable: Translation Kd (ten-thousandths) = -144
+Tunable: Rotation Kp (thousandths) = 90
+Tunable: Rotation Ki (ten-thousandths) = 0
+Tunable: Rotation Kd (ten-thousandths) = -20
+----- Rainbow mode -----
+Event from joystick: button(9)=0
+Event from joystick: button(5)=1
+Starting sequence...
+Event from joystick: button(5)=0
+L:=656mm/  656mm FL:=443mm/  443mm F:=458mm/  458mm FR:=363mm/  363mm R:=649mm/  649mm
+L:=610mm/  656mm FL:=450mm/  450mm F:=458mm/  458mm FR:=363mm/  363mm R:=605mm/  649mm
+L:=<invalid>/  656mm FL:=447mm/  447mm F:=479mm/  458mm FR:=364mm/  363mm R:=558mm/  605mm
+L:=601mm/  610mm FL:=468mm/  450mm F:=476mm/  476mm FR:=381mm/  364mm R:=610mm/  605mm
+L:=682mm/  682mm FL:=467mm/  467mm F:=472mm/  476mm FR:=353mm/  364mm R:=613mm/  610mm
+Next target ball:  red
+Not found: largest contour not wide enough
+Skipping 1 frames
+Not found: largest contour not wide enough
+Not found: largest contour not wide enough
+Not found: largest contour not wide enough
+Not found: largest contour not wide enough
+Not found: largest contour not wide enough
+Not found: largest contour not wide enough
+Not found: largest contour not wide enough
+Not found: didn't find any contours
+Not found: didn't find any contours
+Not found: didn't find any contours
+Not found: didn't find any contours
+Not found: largest contour not wide enough
+Not found: didn't find any contours
+Not found: didn't find any contours
+Not found: didn't find any contours
+L:=746mm/  682mm FL:=438mm/  467mm F:=464mm/  472mm FR:=365mm/  365mm R:=494mm/  610mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=566mm/  682mm FL:=446mm/  446mm F:=507mm/  472mm FR:=382mm/  365mm R:=528mm/  528mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: largest contour not wide enough
+L:=611mm/  611mm FL:=434mm/  438mm F:=484mm/  484mm FR:=353mm/  365mm R:=509mm/  509mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=<invalid>/  611mm FL:=432mm/  434mm F:=476mm/  484mm FR:=402mm/  382mm R:=461mm/  509mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: largest contour not wide enough
+L:=527mm/  611mm FL:=469mm/  434mm F:=487mm/  484mm FR:=342mm/  353mm R:=496mm/  496mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: largest contour not wide enough
+L:=431mm/  527mm FL:=431mm/  432mm F:=471mm/  476mm FR:=364mm/  364mm R:=<invalid>/  496mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: largest contour not tall enough
+L:=437mm/  437mm FL:=509mm/  469mm F:=466mm/  471mm FR:=374mm/  364mm R:=507mm/  507mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:176, Y:12, Radius:16}
+L:=477mm/  437mm FL:=479mm/  479mm F:=466mm/  466mm FR:=424mm/  374mm R:=509mm/  509mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Not found: largest contour not tall enough
+L:=458mm/  458mm FL:=404mm/  479mm F:=470mm/  466mm FR:=424mm/  424mm R:=517mm/  509mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: largest contour not tall enough
+L:=515mm/  477mm FL:=448mm/  448mm F:=490mm/  470mm FR:=424mm/  424mm R:=<invalid>/  517mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 2 frames
+Not found: didn't find any contours
+L:=519mm/  515mm FL:=421mm/  421mm F:=535mm/  490mm FR:=418mm/  424mm R:=581mm/  581mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: largest contour not wide enough
+L:=553mm/  519mm FL:=415mm/  421mm F:=437mm/  490mm FR:=418mm/  418mm R:=640mm/  640mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: largest contour not wide enough
+L:=654mm/  553mm FL:=392mm/  415mm F:=<invalid>/  535mm FR:=444mm/  418mm R:=550mm/  581mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:266, Y:134, Radius:14}
+Ball seen roughly ahead
+L:=545mm/  553mm FL:=391mm/  392mm F:=475mm/  475mm FR:=422mm/  422mm R:=518mm/  550mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:477, Y:114, Radius:20}
+L:=557mm/  557mm FL:=441mm/  392mm F:=450mm/  475mm FR:=383mm/  422mm R:=511mm/  518mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Not found: largest contour not tall enough
+L:=546mm/  546mm FL:=428mm/  428mm F:=464mm/  464mm FR:=428mm/  422mm R:=500mm/  511mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=555mm/  555mm FL:=381mm/  428mm F:=477mm/  464mm FR:=398mm/  398mm R:=481mm/  500mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=522mm/  546mm FL:=334mm/  381mm F:=479mm/  477mm FR:=343mm/  398mm R:=495mm/  495mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=524mm/  524mm FL:=454mm/  381mm F:=410mm/  477mm FR:=378mm/  378mm R:=461mm/  481mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=531mm/  524mm FL:=453mm/  453mm F:=466mm/  466mm FR:=337mm/  343mm R:=454mm/  461mm
+Target: red Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:14, Y:248, Radius:19}
+L:=544mm/  531mm FL:=432mm/  453mm F:=442mm/  442mm FR:=359mm/  359mm R:=521mm/  461mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:99, Y:248, Radius:32}
+L:=554mm/  544mm FL:=400mm/  432mm F:=455mm/  455mm FR:=325mm/  337mm R:=533mm/  521mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:131, Y:248, Radius:27}
+L:=575mm/  554mm FL:=413mm/  413mm F:=454mm/  454mm FR:=335mm/  335mm R:=503mm/  521mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:168, Y:249, Radius:25}
+L:=590mm/  575mm FL:=415mm/  413mm F:=479mm/  455mm FR:=353mm/  335mm R:=552mm/  533mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:204, Y:249, Radius:25}
+L:=548mm/  575mm FL:=400mm/  413mm F:=416mm/  454mm FR:=345mm/  345mm R:=531mm/  531mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:235, Y:247, Radius:26}
+L:=<invalid>/  590mm FL:=404mm/  404mm F:=475mm/  475mm FR:=362mm/  353mm R:=592mm/  552mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:268, Y:249, Radius:24}
+Ball seen roughly ahead
+L:=503mm/  548mm FL:=385mm/  400mm F:=464mm/  464mm FR:=358mm/  358mm R:=592mm/  592mm
+Target: red Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:300, Y:250, Radius:25}
+Ball seen roughly ahead
+L:=<invalid>/  503mm FL:=404mm/  404mm F:=431mm/  464mm FR:=362mm/  362mm R:=591mm/  592mm
+Target: red Rotating
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:329, Y:250, Radius:23}
+Ball seen roughly ahead
+L:=<invalid>/  503mm FL:=384mm/  385mm F:=444mm/  444mm FR:=377mm/  362mm R:=541mm/  591mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:344, Y:250, Radius:23}
+Ball seen roughly ahead
+L:=<invalid>/    0mm FL:=382mm/  384mm F:=508mm/  444mm FR:=350mm/  362mm R:=546mm/  546mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:342, Y:251, Radius:24}
+Ball seen roughly ahead
+L:=<invalid>/    0mm FL:=358mm/  382mm F:=511mm/  508mm FR:=338mm/  350mm R:=648mm/  546mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:336, Y:252, Radius:24}
+Ball seen roughly ahead
+L:=<invalid>/    0mm FL:=401mm/  382mm F:=439mm/  508mm FR:=309mm/  338mm R:=568mm/  568mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:334, Y:252, Radius:25}
+Ball seen roughly ahead
+L:=<invalid>/    0mm FL:=375mm/  375mm F:=468mm/  468mm FR:=341mm/  338mm R:=532mm/  568mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:330, Y:254, Radius:26}
+Ball seen roughly ahead
+L:=538mm/  538mm FL:=389mm/  389mm F:=495mm/  468mm FR:=351mm/  341mm R:=491mm/  532mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:327, Y:254, Radius:26}
+Ball seen roughly ahead
+L:=656mm/  656mm FL:=352mm/  375mm F:=472mm/  472mm FR:=354mm/  351mm R:=514mm/  514mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:322, Y:256, Radius:29}
+Ball seen roughly ahead
+L:=545mm/  545mm FL:=343mm/  352mm F:=468mm/  472mm FR:=334mm/  351mm R:=476mm/  491mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:318, Y:254, Radius:30}
+Ball seen roughly ahead
+L:=<invalid>/  656mm FL:=347mm/  347mm F:=439mm/  468mm FR:=313mm/  334mm R:=495mm/  495mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:312, Y:256, Radius:31}
+Ball seen roughly ahead
+L:=644mm/  644mm FL:=342mm/  343mm F:=417mm/  439mm FR:=304mm/  313mm R:=461mm/  476mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:314, Y:257, Radius:33}
+Ball seen roughly ahead
+L:=<invalid>/  644mm FL:=309mm/  342mm F:=402mm/  417mm FR:=298mm/  304mm R:=456mm/  461mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:314, Y:259, Radius:34}
+Ball seen roughly ahead
+L:=471mm/  644mm FL:=323mm/  323mm F:=406mm/  406mm FR:=312mm/  304mm R:=419mm/  456mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:318, Y:260, Radius:37}
+Ball seen roughly ahead
+L:=<invalid>/  471mm FL:=296mm/  309mm F:=385mm/  402mm FR:=285mm/  298mm R:=448mm/  448mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:320, Y:262, Radius:38}
+Ball seen roughly ahead
+Ball within expected Y range: 182 < 262 < 334
+L:=498mm/  498mm FL:=278mm/  296mm F:=362mm/  385mm FR:=261mm/  285mm R:=438mm/  438mm
+Target: red Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:322, Y:264, Radius:40}
+Ball seen roughly ahead
+Ball within expected Y range: 180 < 264 < 338
+L:=492mm/  498mm FL:=274mm/  278mm F:=362mm/  362mm FR:=248mm/  261mm R:=414mm/  438mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:321, Y:267, Radius:43}
+Ball seen roughly ahead
+Ball within expected Y range: 176 < 267 < 344
+L:=482mm/  492mm FL:=269mm/  274mm F:=333mm/  362mm FR:=248mm/  248mm R:=394mm/  414mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:317, Y:270, Radius:46}
+Ball seen roughly ahead
+Ball within expected Y range: 176 < 270 < 344
+L:=506mm/  492mm FL:=246mm/  269mm F:=339mm/  339mm FR:=232mm/  248mm R:=410mm/  410mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:312, Y:271, Radius:51}
+Ball seen roughly ahead
+Ball within expected Y range: 172 < 271 < 351
+L:=462mm/  482mm FL:=251mm/  251mm F:=303mm/  333mm FR:=202mm/  232mm R:=369mm/  394mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:311, Y:278, Radius:54}
+Ball seen roughly ahead
+Ball within expected Y range: 170 < 278 < 354
+L:=455mm/  462mm FL:=218mm/  246mm F:=290mm/  303mm FR:=195mm/  202mm R:=345mm/  369mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:316, Y:280, Radius:60}
+Ball seen roughly ahead
+Ball within expected Y range: 163 < 280 < 365
+L:=383mm/  455mm FL:=215mm/  218mm F:=288mm/  290mm FR:=194mm/  195mm R:=364mm/  364mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:316, Y:286, Radius:66}
+Ball seen roughly ahead
+Ball within expected Y range: 160 < 286 < 370
+L:=365mm/  383mm FL:=190mm/  215mm F:=265mm/  288mm FR:=198mm/  195mm R:=327mm/  345mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:318, Y:290, Radius:74}
+Ball seen roughly ahead
+Ball within expected Y range: 159 < 290 < 371
+L:=333mm/  365mm FL:=181mm/  190mm F:=224mm/  265mm FR:=175mm/  194mm R:=341mm/  341mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 2 frames
+Found at rainbow.BallPosition{X:324, Y:305, Radius:88}
+Ball seen roughly ahead
+Ball within expected Y range: 153 < 305 < 383
+L:=347mm/  347mm FL:=163mm/  181mm F:=218mm/  224mm FR:=153mm/  175mm R:=280mm/  327mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:326, Y:318, Radius:101}
+Ball seen roughly ahead
+Ball within expected Y range: 137 < 318 < 409
+L:=274mm/  333mm FL:=136mm/  163mm F:=206mm/  218mm FR:=124mm/  153mm R:=296mm/  296mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:320, Y:335, Radius:121}
+Ball seen roughly ahead
+Ball within expected Y range: 134 < 335 < 414
+L:=258mm/  274mm FL:=122mm/  136mm F:=168mm/  206mm FR:=117mm/  124mm R:=270mm/  280mm
+Target: red Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:310, Y:346, Radius:140}
+Ball seen roughly ahead
+Ball within expected Y range: 128 < 346 < 424
+L:=228mm/  258mm FL:=104mm/  122mm F:=151mm/  168mm FR:= 95mm/  117mm R:=241mm/  270mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:316, Y:354, Radius:155}
+Ball seen roughly ahead
+Ball within expected Y range: 102 < 354 < 465
+L:=221mm/  228mm FL:= 77mm/  104mm F:=125mm/  151mm FR:= 83mm/   95mm R:=214mm/  241mm
+Target: red Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:327, Y:360, Radius:186}
+Ball seen roughly ahead
+Ball within expected Y range: 87 < 360 < 491
+L:=176mm/  221mm FL:= 44mm/   77mm F:= 96mm/  125mm FR:= 50mm/   83mm R:=172mm/  214mm
+Target: red Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 2 frames
+Found at rainbow.BallPosition{X:320, Y:363, Radius:218}
+Ball seen roughly ahead
+Ball within expected Y range: 55 < 363 < 543
+L:=142mm/  176mm FL:= 30mm/   44mm F:= 72mm/   96mm FR:= 35mm/   50mm R:=142mm/  172mm
+Target: red Advancing
+Speeds: FL=-15 FR=-15 BL=-15 BR=-15
+Reached target ball: red in 9.40830537s
+Next target ball:  blue
+Skipping 1 frames
+Not found: didn't find any contours
+L:=119mm/  142mm FL:= 28mm/   30mm F:= 75mm/   75mm FR:= 26mm/   35mm R:=132mm/  142mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=147mm/  142mm FL:= 33mm/   30mm F:= 83mm/   75mm FR:= 34mm/   34mm R:=136mm/  136mm
+Target: blue Reversing
+Skipping 1 frames
+Not found: didn't find any contours
+L:=242mm/  147mm FL:= 52mm/   33mm F:=107mm/   83mm FR:= 60mm/   34mm R:=168mm/  136mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=220mm/  220mm FL:= 60mm/   52mm F:=116mm/  107mm FR:= 68mm/   60mm R:=167mm/  167mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=216mm/  220mm FL:= 75mm/   60mm F:=122mm/  116mm FR:= 75mm/   68mm R:=200mm/  168mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=220mm/  220mm FL:= 87mm/   75mm F:=134mm/  122mm FR:= 88mm/   75mm R:=203mm/  200mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=296mm/  220mm FL:= 93mm/   87mm F:=157mm/  134mm FR:= 93mm/   88mm R:=232mm/  203mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=264mm/  264mm FL:=113mm/   93mm F:=150mm/  150mm FR:=106mm/   93mm R:=251mm/  232mm
+Target: blue Reversing
+Skipping 1 frames
+Not found: didn't find any contours
+L:=281mm/  281mm FL:=123mm/  113mm F:=186mm/  157mm FR:=122mm/  106mm R:=249mm/  249mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=270mm/  270mm FL:=130mm/  123mm F:=192mm/  186mm FR:=128mm/  122mm R:=297mm/  251mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=308mm/  281mm FL:=136mm/  130mm F:=182mm/  186mm FR:=137mm/  128mm R:=260mm/  260mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=313mm/  308mm FL:=158mm/  136mm F:=205mm/  192mm FR:=148mm/  137mm R:=267mm/  267mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=334mm/  313mm FL:=153mm/  153mm F:=217mm/  205mm FR:=155mm/  148mm R:=301mm/  267mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=416mm/  334mm FL:=157mm/  157mm F:=232mm/  217mm FR:=167mm/  155mm R:=304mm/  301mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  416mm FL:=178mm/  157mm F:=239mm/  232mm FR:=175mm/  167mm R:=304mm/  304mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=375mm/  416mm FL:=190mm/  178mm F:=249mm/  239mm FR:=181mm/  175mm R:=308mm/  304mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=340mm/  375mm FL:=185mm/  185mm F:=243mm/  243mm FR:=179mm/  179mm R:=318mm/  308mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=402mm/  375mm FL:=193mm/  190mm F:=263mm/  249mm FR:=199mm/  181mm R:=340mm/  318mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  402mm FL:=201mm/  193mm F:=278mm/  263mm FR:=203mm/  199mm R:=337mm/  337mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=405mm/  405mm FL:=205mm/  201mm F:=295mm/  278mm FR:=205mm/  203mm R:=361mm/  340mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=387mm/  405mm FL:=225mm/  205mm F:=289mm/  289mm FR:=209mm/  205mm R:=341mm/  341mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=447mm/  405mm FL:=232mm/  225mm F:=314mm/  295mm FR:=214mm/  209mm R:=366mm/  361mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=443mm/  443mm FL:=231mm/  231mm F:=317mm/  314mm FR:=237mm/  214mm R:=319mm/  341mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=471mm/  447mm FL:=230mm/  231mm F:=336mm/  317mm FR:=236mm/  236mm R:=335mm/  335mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=468mm/  468mm FL:=255mm/  231mm F:=335mm/  335mm FR:=227mm/  236mm R:=413mm/  335mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  471mm FL:=258mm/  255mm F:=329mm/  335mm FR:=257mm/  236mm R:=354mm/  354mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  468mm FL:=256mm/  256mm F:=320mm/  329mm FR:=246mm/  246mm R:=397mm/  397mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=451mm/  451mm FL:=271mm/  258mm F:=350mm/  329mm FR:=273mm/  257mm R:=396mm/  396mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=442mm/  451mm FL:=274mm/  271mm F:=361mm/  350mm FR:=279mm/  273mm R:=411mm/  397mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  451mm FL:=264mm/  271mm F:=370mm/  361mm FR:=276mm/  276mm R:=399mm/  399mm
+Target: blue Reversing
+Not found: largest contour not wide enough
+L:=<invalid>/  442mm FL:=281mm/  274mm F:=378mm/  370mm FR:=272mm/  276mm R:=428mm/  411mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=292mm/  281mm F:=371mm/  371mm FR:=285mm/  276mm R:=442mm/  428mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=303mm/  292mm F:=386mm/  378mm FR:=292mm/  285mm R:=445mm/  442mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=302mm/  302mm F:=407mm/  386mm FR:=286mm/  286mm R:=366mm/  442mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=533mm/  533mm FL:=294mm/  302mm F:=391mm/  391mm FR:=291mm/  291mm R:=421mm/  421mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=612mm/  612mm FL:=298mm/  298mm F:=388mm/  391mm FR:=287mm/  287mm R:=451mm/  421mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=756mm/  612mm FL:=316mm/  298mm F:=410mm/  391mm FR:=312mm/  291mm R:=441mm/  441mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  756mm FL:=309mm/  309mm F:=417mm/  410mm FR:=316mm/  312mm R:=435mm/  441mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  756mm FL:=312mm/  312mm F:=432mm/  417mm FR:=306mm/  312mm R:=479mm/  441mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=343mm/  312mm F:=415mm/  417mm FR:=313mm/  313mm R:=495mm/  479mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=359mm/  343mm F:=447mm/  432mm FR:=328mm/  313mm R:=404mm/  479mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=367mm/  359mm F:=439mm/  439mm FR:=333mm/  328mm R:=493mm/  493mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=611mm/  611mm FL:=333mm/  359mm F:=445mm/  445mm FR:=334mm/  333mm R:=486mm/  486mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=579mm/  611mm FL:=364mm/  364mm F:=474mm/  445mm FR:=341mm/  334mm R:=555mm/  493mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  611mm FL:=359mm/  359mm F:=479mm/  474mm FR:=305mm/  334mm R:=425mm/  486mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=757mm/  757mm FL:=357mm/  359mm F:=498mm/  479mm FR:=326mm/  326mm R:=507mm/  507mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  757mm FL:=381mm/  359mm F:=489mm/  489mm FR:=332mm/  326mm R:=<invalid>/  507mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=656mm/  757mm FL:=356mm/  357mm F:=469mm/  489mm FR:=319mm/  326mm R:=540mm/  540mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=649mm/  656mm FL:=404mm/  381mm F:=504mm/  489mm FR:=359mm/  332mm R:=532mm/  540mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  656mm FL:=372mm/  372mm F:=459mm/  469mm FR:=355mm/  355mm R:=566mm/  540mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  649mm FL:=360mm/  372mm F:=479mm/  479mm FR:=371mm/  359mm R:=503mm/  532mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=400mm/  372mm F:=500mm/  479mm FR:=363mm/  363mm R:=594mm/  566mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=379mm/  379mm F:=495mm/  495mm FR:=366mm/  366mm R:=510mm/  510mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=385mm/  385mm F:=500mm/  500mm FR:=348mm/  363mm R:=558mm/  558mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=605mm/  605mm FL:=395mm/  385mm F:=469mm/  495mm FR:=387mm/  366mm R:=562mm/  558mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=<invalid>/  605mm FL:=380mm/  385mm F:=523mm/  500mm FR:=337mm/  348mm R:=511mm/  558mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=616mm/  616mm FL:=367mm/  380mm F:=556mm/  523mm FR:=346mm/  346mm R:=585mm/  562mm
+Target: blue Reversing
+Not found: didn't find any contours
+L:=8190mm/ 8190mm FL:=426mm/  380mm F:=445mm/  523mm FR:=334mm/  337mm R:=584mm/  584mm
+Target: blue Reversing
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=592mm/  616mm FL:=431mm/  426mm F:=542mm/  542mm FR:=358mm/  346mm R:=566mm/  584mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=599mm/  599mm FL:=433mm/  431mm F:=487mm/  487mm FR:=338mm/  338mm R:=574mm/  574mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=597mm/  597mm FL:=380mm/  431mm F:=505mm/  505mm FR:=327mm/  338mm R:=593mm/  574mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  599mm FL:=417mm/  417mm F:=516mm/  505mm FR:=360mm/  338mm R:=473mm/  574mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=672mm/  672mm FL:=398mm/  398mm F:=446mm/  505mm FR:=340mm/  340mm R:=509mm/  509mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  672mm FL:=379mm/  398mm F:=429mm/  446mm FR:=359mm/  359mm R:=495mm/  495mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  672mm FL:=384mm/  384mm F:=450mm/  446mm FR:=367mm/  359mm R:=516mm/  509mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=593mm/  593mm FL:=405mm/  384mm F:=455mm/  450mm FR:=346mm/  359mm R:=434mm/  495mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  593mm FL:=424mm/  405mm F:=486mm/  455mm FR:=353mm/  353mm R:=489mm/  489mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  593mm FL:=429mm/  424mm F:=423mm/  455mm FR:=372mm/  353mm R:=490mm/  489mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=546mm/  546mm FL:=414mm/  424mm F:=434mm/  434mm FR:=377mm/  372mm R:=429mm/  489mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=557mm/  557mm FL:=417mm/  417mm F:=411mm/  423mm FR:=343mm/  372mm R:=443mm/  443mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=626mm/  557mm FL:=446mm/  417mm F:=414mm/  414mm FR:=376mm/  376mm R:=436mm/  436mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  626mm FL:=398mm/  417mm F:=406mm/  411mm FR:=338mm/  343mm R:=466mm/  443mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  626mm FL:=439mm/  439mm F:=411mm/  411mm FR:=326mm/  338mm R:=485mm/  466mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=395mm/  398mm F:=436mm/  411mm FR:=352mm/  338mm R:=440mm/  466mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=386mm/  395mm F:=457mm/  436mm FR:=360mm/  352mm R:=479mm/  479mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=407mm/  395mm F:=397mm/  436mm FR:=336mm/  352mm R:=477mm/  477mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=392mm/  392mm F:=503mm/  457mm FR:=325mm/  336mm R:=477mm/  477mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=575mm/  575mm FL:=382mm/  392mm F:=451mm/  451mm FR:=360mm/  336mm R:=513mm/  477mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=634mm/  634mm FL:=385mm/  385mm F:=446mm/  451mm FR:=327mm/  327mm R:=549mm/  513mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  634mm FL:=388mm/  385mm F:=<invalid>/  451mm FR:=331mm/  331mm R:=540mm/  540mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  634mm FL:=389mm/  388mm F:=487mm/  487mm FR:=348mm/  331mm R:=533mm/  540mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=748mm/  748mm FL:=373mm/  388mm F:=504mm/  504mm FR:=360mm/  348mm R:=550mm/  540mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  748mm FL:=349mm/  373mm F:=424mm/  487mm FR:=377mm/  360mm R:=548mm/  548mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  748mm FL:=382mm/  373mm F:=393mm/  424mm FR:=368mm/  368mm R:=573mm/  550mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=588mm/  588mm FL:=379mm/  379mm F:=425mm/  424mm FR:=341mm/  368mm R:=527mm/  548mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=545mm/  588mm FL:=341mm/  379mm F:=404mm/  404mm FR:=361mm/  361mm R:=532mm/  532mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  588mm FL:=398mm/  379mm F:=386mm/  404mm FR:=384mm/  361mm R:=521mm/  527mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=516mm/  545mm FL:=398mm/  398mm F:=417mm/  404mm FR:=372mm/  372mm R:=515mm/  521mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=494mm/  516mm FL:=393mm/  398mm F:=395mm/  395mm FR:=312mm/  372mm R:=528mm/  521mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=539mm/  516mm FL:=404mm/  398mm F:=390mm/  395mm FR:=338mm/  338mm R:=536mm/  528mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=490mm/  494mm FL:=419mm/  404mm F:=400mm/  395mm FR:=364mm/  338mm R:=487mm/  528mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=533mm/  533mm FL:=422mm/  419mm F:=381mm/  390mm FR:=362mm/  362mm R:=513mm/  513mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=497mm/  497mm FL:=378mm/  419mm F:=420mm/  400mm FR:=390mm/  364mm R:=509mm/  509mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=485mm/  497mm FL:=443mm/  422mm F:=419mm/  419mm FR:=363mm/  363mm R:=525mm/  513mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=478mm/  485mm FL:=436mm/  436mm F:=393mm/  419mm FR:=359mm/  363mm R:=543mm/  525mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=529mm/  485mm FL:=446mm/  443mm F:=430mm/  419mm FR:=367mm/  363mm R:=517mm/  525mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  529mm FL:=446mm/  446mm F:=401mm/  401mm FR:=346mm/  359mm R:=546mm/  543mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=511mm/  529mm FL:=434mm/  446mm F:=434mm/  430mm FR:=355mm/  355mm R:=506mm/  517mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=565mm/  565mm FL:=452mm/  446mm F:=417mm/  417mm FR:=326mm/  346mm R:=549mm/  546mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  565mm FL:=455mm/  452mm F:=440mm/  434mm FR:=344mm/  344mm R:=533mm/  533mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=555mm/  565mm FL:=437mm/  452mm F:=456mm/  440mm FR:=355mm/  344mm R:=548mm/  548mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=591mm/  591mm FL:=424mm/  437mm F:=465mm/  456mm FR:=343mm/  344mm R:=608mm/  548mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=618mm/  591mm FL:=436mm/  436mm F:=477mm/  465mm FR:=361mm/  355mm R:=624mm/  608mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=508mm/  591mm FL:=440mm/  436mm F:=471mm/  471mm FR:=309mm/  343mm R:=535mm/  608mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=528mm/  528mm FL:=432mm/  436mm F:=463mm/  471mm FR:=362mm/  361mm R:=413mm/  535mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=513mm/  513mm FL:=430mm/  432mm F:=463mm/  463mm FR:=358mm/  358mm R:=549mm/  535mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  528mm FL:=443mm/  432mm F:=456mm/  463mm FR:=333mm/  358mm R:=516mm/  516mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=485mm/  513mm FL:=447mm/  443mm F:=466mm/  463mm FR:=356mm/  356mm R:=492mm/  516mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=535mm/  535mm FL:=470mm/  447mm F:=468mm/  466mm FR:=337mm/  337mm R:=580mm/  516mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=437mm/  485mm FL:=444mm/  447mm F:=481mm/  468mm FR:=346mm/  346mm R:=503mm/  503mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=457mm/  457mm FL:=414mm/  444mm F:=469mm/  469mm FR:=375mm/  346mm R:=503mm/  503mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=449mm/  449mm FL:=421mm/  421mm F:=452mm/  469mm FR:=361mm/  361mm R:=483mm/  503mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: largest contour not wide enough
+L:=475mm/  457mm FL:=433mm/  421mm F:=475mm/  469mm FR:=371mm/  371mm R:=<invalid>/  503mm
+Target: blue Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Found at rainbow.BallPosition{X:29, Y:131, Radius:44}
+L:=414mm/  449mm FL:=374mm/  421mm F:=434mm/  452mm FR:=405mm/  371mm R:=595mm/  595mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:60, Y:158, Radius:65}
+L:=456mm/  456mm FL:=413mm/  413mm F:=466mm/  466mm FR:=395mm/  395mm R:=478mm/  595mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:80, Y:184, Radius:86}
+L:=484mm/  456mm FL:=392mm/  392mm F:=461mm/  461mm FR:=417mm/  405mm R:=540mm/  540mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:83, Y:184, Radius:85}
+L:=441mm/  456mm FL:=456mm/  413mm F:=449mm/  461mm FR:=425mm/  417mm R:=486mm/  486mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:85, Y:174, Radius:81}
+L:=477mm/  477mm FL:=404mm/  404mm F:=460mm/  460mm FR:=414mm/  417mm R:=528mm/  528mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:86, Y:186, Radius:86}
+L:=466mm/  466mm FL:=398mm/  404mm F:=448mm/  449mm FR:=402mm/  414mm R:=497mm/  497mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:92, Y:182, Radius:85}
+L:=501mm/  477mm FL:=427mm/  404mm F:=444mm/  448mm FR:=447mm/  414mm R:=524mm/  524mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:91, Y:206, Radius:76}
+L:=462mm/  466mm FL:=451mm/  427mm F:=479mm/  448mm FR:=421mm/  421mm R:=499mm/  499mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:77, Y:172, Radius:39}
+L:=439mm/  462mm FL:=423mm/  427mm F:=488mm/  479mm FR:=400mm/  421mm R:=558mm/  524mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:14, Y:224, Radius:19}
+L:=449mm/  449mm FL:=343mm/  423mm F:=476mm/  479mm FR:=424mm/  421mm R:=534mm/  534mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:22, Y:224, Radius:23}
+L:=449mm/  449mm FL:=371mm/  371mm F:=479mm/  479mm FR:=439mm/  424mm R:=509mm/  534mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:33, Y:224, Radius:25}
+L:=466mm/  449mm FL:=454mm/  371mm F:=456mm/  476mm FR:=429mm/  429mm R:=531mm/  531mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:56, Y:224, Radius:25}
+L:=516mm/  466mm FL:=463mm/  454mm F:=491mm/  479mm FR:=425mm/  429mm R:=584mm/  531mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:76, Y:226, Radius:24}
+L:=594mm/  516mm FL:=389mm/  454mm F:=500mm/  491mm FR:=435mm/  429mm R:=620mm/  584mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:96, Y:226, Radius:23}
+L:=457mm/  516mm FL:=416mm/  416mm F:=483mm/  491mm FR:=418mm/  425mm R:=660mm/  620mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:110, Y:226, Radius:23}
+L:=432mm/  457mm FL:=472mm/  416mm F:=495mm/  495mm FR:=412mm/  418mm R:=612mm/  620mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:126, Y:226, Radius:24}
+L:=447mm/  447mm FL:=417mm/  417mm F:=494mm/  494mm FR:=408mm/  412mm R:=504mm/  612mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:28, Y:43, Radius:28}
+L:=<invalid>/  447mm FL:=454mm/  454mm F:=495mm/  495mm FR:=403mm/  408mm R:=621mm/  612mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:38, Y:43, Radius:30}
+L:=459mm/  459mm FL:=451mm/  451mm F:=466mm/  494mm FR:=418mm/  408mm R:=693mm/  621mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:54, Y:46, Radius:29}
+L:=511mm/  511mm FL:=420mm/  451mm F:=464mm/  466mm FR:=409mm/  409mm R:=<invalid>/  693mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:72, Y:50, Radius:26}
+L:=<invalid>/  511mm FL:=414mm/  420mm F:=450mm/  464mm FR:=420mm/  418mm R:=607mm/  693mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:216, Y:228, Radius:22}
+L:=548mm/  548mm FL:=410mm/  414mm F:=472mm/  464mm FR:=433mm/  420mm R:=600mm/  607mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:96, Y:38, Radius:32}
+L:=550mm/  550mm FL:=433mm/  414mm F:=421mm/  450mm FR:=414mm/  420mm R:=529mm/  600mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:118, Y:40, Radius:33}
+L:=<invalid>/  550mm FL:=480mm/  433mm F:=478mm/  472mm FR:=404mm/  414mm R:=734mm/  600mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:138, Y:41, Radius:33}
+L:=<invalid>/  550mm FL:=393mm/  433mm F:=505mm/  478mm FR:=419mm/  414mm R:=548mm/  548mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:155, Y:42, Radius:32}
+L:=580mm/  580mm FL:=379mm/  393mm F:=<invalid>/  505mm FR:=428mm/  419mm R:=<invalid>/  734mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:174, Y:42, Radius:32}
+L:=596mm/  596mm FL:=413mm/  393mm F:=455mm/  505mm FR:=426mm/  426mm R:=615mm/  615mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:189, Y:42, Radius:31}
+L:=564mm/  580mm FL:=408mm/  408mm F:=502mm/  502mm FR:=421mm/  426mm R:=608mm/  615mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:324, Y:229, Radius:19}
+Ball seen roughly ahead
+L:=555mm/  564mm FL:=440mm/  413mm F:=509mm/  502mm FR:=433mm/  426mm R:=570mm/  608mm
+Target: blue Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:338, Y:230, Radius:20}
+Ball seen roughly ahead
+L:=<invalid>/  564mm FL:=437mm/  437mm F:=523mm/  509mm FR:=437mm/  433mm R:=543mm/  570mm
+Target: blue Rotating
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:352, Y:229, Radius:19}
+Ball seen roughly ahead
+L:=585mm/  585mm FL:=438mm/  438mm F:=425mm/  509mm FR:=420mm/  433mm R:=527mm/  543mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:368, Y:230, Radius:19}
+Ball seen roughly ahead
+L:=559mm/  585mm FL:=395mm/  437mm F:=462mm/  462mm FR:=426mm/  426mm R:=563mm/  543mm
+Target: blue Advancing
+Speeds: FL=16 FR=13 BL=16 BR=13
+Found at rainbow.BallPosition{X:380, Y:230, Radius:19}
+Ball seen roughly ahead
+L:=594mm/  585mm FL:=365mm/  395mm F:=446mm/  446mm FR:=448mm/  426mm R:=543mm/  543mm
+Target: blue Advancing
+Speeds: FL=16 FR=13 BL=16 BR=13
+Found at rainbow.BallPosition{X:393, Y:229, Radius:20}
+Ball seen roughly ahead
+L:=600mm/  594mm FL:=412mm/  395mm F:=480mm/  462mm FR:=404mm/  426mm R:=449mm/  543mm
+Target: blue Advancing
+Speeds: FL=17 FR=12 BL=17 BR=12
+Found at rainbow.BallPosition{X:394, Y:228, Radius:21}
+Ball seen roughly ahead
+L:=536mm/  594mm FL:=370mm/  370mm F:=405mm/  446mm FR:=421mm/  421mm R:=573mm/  543mm
+Target: blue Advancing
+Speeds: FL=17 FR=12 BL=17 BR=12
+Found at rainbow.BallPosition{X:394, Y:226, Radius:22}
+Ball seen roughly ahead
+L:=603mm/  600mm FL:=403mm/  403mm F:=496mm/  480mm FR:=398mm/  404mm R:=582mm/  573mm
+Target: blue Advancing
+Speeds: FL=17 FR=12 BL=17 BR=12
+Found at rainbow.BallPosition{X:390, Y:228, Radius:21}
+Ball seen roughly ahead
+L:=539mm/  539mm FL:=408mm/  403mm F:=472mm/  472mm FR:=406mm/  406mm R:=<invalid>/  582mm
+Target: blue Advancing
+Speeds: FL=17 FR=12 BL=17 BR=12
+Found at rainbow.BallPosition{X:382, Y:229, Radius:21}
+Ball seen roughly ahead
+L:=569mm/  569mm FL:=408mm/  408mm F:=461mm/  472mm FR:=398mm/  398mm R:=574mm/  582mm
+Target: blue Advancing
+Speeds: FL=16 FR=13 BL=16 BR=13
+Found at rainbow.BallPosition{X:371, Y:226, Radius:22}
+Ball seen roughly ahead
+L:=524mm/  539mm FL:=415mm/  408mm F:=482mm/  472mm FR:=398mm/  398mm R:=644mm/  644mm
+Target: blue Advancing
+Speeds: FL=16 FR=13 BL=16 BR=13
+Found at rainbow.BallPosition{X:362, Y:228, Radius:21}
+Ball seen roughly ahead
+L:=575mm/  569mm FL:=396mm/  408mm F:=477mm/  477mm FR:=394mm/  398mm R:=613mm/  613mm
+Target: blue Advancing
+Speeds: FL=16 FR=13 BL=16 BR=13
+Found at rainbow.BallPosition{X:356, Y:226, Radius:23}
+Ball seen roughly ahead
+L:=529mm/  529mm FL:=357mm/  396mm F:=473mm/  477mm FR:=393mm/  394mm R:=<invalid>/  644mm
+Target: blue Advancing
+Speeds: FL=16 FR=13 BL=16 BR=13
+Found at rainbow.BallPosition{X:351, Y:227, Radius:23}
+Ball seen roughly ahead
+L:=547mm/  547mm FL:=359mm/  359mm F:=456mm/  473mm FR:=379mm/  393mm R:=614mm/  614mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:347, Y:227, Radius:23}
+Ball seen roughly ahead
+L:=504mm/  529mm FL:=364mm/  359mm F:=457mm/  457mm FR:=387mm/  387mm R:=622mm/  622mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:340, Y:227, Radius:23}
+Ball seen roughly ahead
+L:=495mm/  504mm FL:=372mm/  364mm F:=451mm/  456mm FR:=360mm/  379mm R:=546mm/  614mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:336, Y:226, Radius:25}
+Ball seen roughly ahead
+L:=557mm/  504mm FL:=365mm/  365mm F:=438mm/  451mm FR:=378mm/  378mm R:=564mm/  564mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:333, Y:225, Radius:25}
+Ball seen roughly ahead
+L:=547mm/  547mm FL:=380mm/  372mm F:=460mm/  451mm FR:=354mm/  360mm R:=556mm/  556mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:332, Y:226, Radius:26}
+Ball seen roughly ahead
+L:=520mm/  547mm FL:=328mm/  365mm F:=405mm/  438mm FR:=341mm/  354mm R:=615mm/  564mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:330, Y:226, Radius:26}
+Ball seen roughly ahead
+L:=484mm/  520mm FL:=340mm/  340mm F:=452mm/  452mm FR:=332mm/  341mm R:=583mm/  583mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:329, Y:224, Radius:27}
+Ball seen roughly ahead
+L:=481mm/  484mm FL:=349mm/  340mm F:=471mm/  452mm FR:=335mm/  335mm R:=580mm/  583mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:328, Y:224, Radius:28}
+Ball seen roughly ahead
+L:=525mm/  484mm FL:=332mm/  340mm F:=422mm/  452mm FR:=336mm/  335mm R:=605mm/  583mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:328, Y:225, Radius:28}
+Ball seen roughly ahead
+L:=535mm/  525mm FL:=335mm/  335mm F:=425mm/  425mm FR:=321mm/  335mm R:=569mm/  580mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:323, Y:225, Radius:29}
+Ball seen roughly ahead
+L:=531mm/  531mm FL:=328mm/  332mm F:=412mm/  422mm FR:=307mm/  321mm R:=588mm/  588mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:222, Radius:30}
+Ball seen roughly ahead
+L:=491mm/  531mm FL:=323mm/  328mm F:=399mm/  412mm FR:=305mm/  307mm R:=505mm/  569mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:319, Y:223, Radius:30}
+Ball seen roughly ahead
+Ball within expected Y range: 184 < 223 < 332
+L:=465mm/  491mm FL:=287mm/  323mm F:=423mm/  412mm FR:=308mm/  307mm R:=<invalid>/  588mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:316, Y:224, Radius:31}
+Ball seen roughly ahead
+L:=487mm/  487mm FL:=286mm/  287mm F:=392mm/  399mm FR:=294mm/  305mm R:=499mm/  505mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:315, Y:223, Radius:31}
+Ball seen roughly ahead
+Ball within expected Y range: 182 < 223 < 335
+L:=461mm/  465mm FL:=292mm/  287mm F:=401mm/  401mm FR:=287mm/  294mm R:=547mm/  547mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:314, Y:222, Radius:34}
+Ball seen roughly ahead
+L:=472mm/  472mm FL:=307mm/  292mm F:=425mm/  401mm FR:=285mm/  287mm R:=506mm/  506mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:313, Y:222, Radius:33}
+Ball seen roughly ahead
+L:=493mm/  472mm FL:=271mm/  292mm F:=374mm/  401mm FR:=273mm/  285mm R:=502mm/  506mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:314, Y:223, Radius:34}
+Ball seen roughly ahead
+Ball within expected Y range: 182 < 223 < 334
+L:=470mm/  472mm FL:=295mm/  295mm F:=375mm/  375mm FR:=275mm/  275mm R:=473mm/  502mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:315, Y:221, Radius:36}
+Ball seen roughly ahead
+Ball within expected Y range: 178 < 221 < 341
+L:=456mm/  470mm FL:=301mm/  295mm F:=369mm/  374mm FR:=254mm/  273mm R:=481mm/  481mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:316, Y:221, Radius:36}
+Ball seen roughly ahead
+Ball within expected Y range: 178 < 221 < 341
+L:=453mm/  456mm FL:=272mm/  295mm F:=383mm/  375mm FR:=264mm/  264mm R:=<invalid>/  481mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:317, Y:219, Radius:38}
+Ball seen roughly ahead
+Ball within expected Y range: 178 < 219 < 341
+L:=437mm/  453mm FL:=259mm/  272mm F:=367mm/  369mm FR:=248mm/  254mm R:=<invalid>/  481mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:318, Y:219, Radius:38}
+Ball seen roughly ahead
+Ball within expected Y range: 177 < 219 < 342
+L:=437mm/  437mm FL:=276mm/  272mm F:=327mm/  367mm FR:=250mm/  250mm R:=<invalid>/    0mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:319, Y:218, Radius:40}
+Ball seen roughly ahead
+Ball within expected Y range: 177 < 218 < 343
+L:=407mm/  437mm FL:=250mm/  259mm F:=352mm/  352mm FR:=237mm/  248mm R:=451mm/  451mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:320, Y:218, Radius:41}
+Ball seen roughly ahead
+Ball within expected Y range: 174 < 218 < 347
+L:=415mm/  415mm FL:=253mm/  253mm F:=306mm/  327mm FR:=215mm/  237mm R:=429mm/  451mm
+Target: blue Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:321, Y:219, Radius:43}
+Ball seen roughly ahead
+Ball within expected Y range: 169 < 219 < 356
+L:=383mm/  407mm FL:=245mm/  250mm F:=350mm/  350mm FR:=223mm/  223mm R:=385mm/  429mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:321, Y:217, Radius:45}
+Ball seen roughly ahead
+Ball within expected Y range: 174 < 217 < 348
+L:=387mm/  387mm FL:=243mm/  245mm F:=314mm/  314mm FR:=218mm/  218mm R:=390mm/  390mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:325, Y:218, Radius:45}
+Ball seen roughly ahead
+Ball within expected Y range: 166 < 218 < 360
+L:=378mm/  383mm FL:=235mm/  243mm F:=283mm/  314mm FR:=210mm/  218mm R:=448mm/  390mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:324, Y:218, Radius:48}
+Ball seen roughly ahead
+Ball within expected Y range: 166 < 218 < 360
+L:=366mm/  378mm FL:=232mm/  235mm F:=298mm/  298mm FR:=205mm/  210mm R:=393mm/  393mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:216, Radius:50}
+Ball seen roughly ahead
+Ball within expected Y range: 162 < 216 < 367
+L:=348mm/  366mm FL:=225mm/  232mm F:=277mm/  283mm FR:=193mm/  205mm R:=472mm/  448mm
+Target: blue Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:320, Y:217, Radius:52}
+Ball seen roughly ahead
+Ball within expected Y range: 158 < 217 < 374
+L:=320mm/  348mm FL:=220mm/  225mm F:=277mm/  277mm FR:=191mm/  193mm R:=426mm/  426mm
+Target: blue Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:318, Y:216, Radius:55}
+Ball seen roughly ahead
+Ball within expected Y range: 156 < 216 < 377
+L:=335mm/  335mm FL:=212mm/  220mm F:=276mm/  277mm FR:=178mm/  191mm R:=380mm/  426mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:312, Y:218, Radius:57}
+Ball seen roughly ahead
+Ball within expected Y range: 156 < 218 < 377
+L:=342mm/  335mm FL:=193mm/  212mm F:=246mm/  276mm FR:=168mm/  178mm R:=383mm/  383mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:310, Y:216, Radius:59}
+Ball seen roughly ahead
+Ball within expected Y range: 156 < 216 < 377
+L:=324mm/  335mm FL:=191mm/  193mm F:=224mm/  246mm FR:=155mm/  168mm R:=322mm/  380mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:310, Y:215, Radius:62}
+Ball seen roughly ahead
+Ball within expected Y range: 146 < 215 < 394
+L:=304mm/  324mm FL:=181mm/  191mm F:=236mm/  236mm FR:=141mm/  155mm R:=327mm/  327mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:309, Y:215, Radius:66}
+Ball seen roughly ahead
+Ball within expected Y range: 142 < 215 < 400
+L:=316mm/  316mm FL:=168mm/  181mm F:=249mm/  236mm FR:=133mm/  141mm R:=367mm/  327mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:309, Y:214, Radius:69}
+Ball seen roughly ahead
+Ball within expected Y range: 142 < 214 < 400
+L:=299mm/  304mm FL:=161mm/  168mm F:=231mm/  236mm FR:=122mm/  133mm R:=383mm/  367mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:311, Y:211, Radius:74}
+Ball seen roughly ahead
+Ball within expected Y range: 142 < 211 < 400
+L:=268mm/  299mm FL:=154mm/  161mm F:=218mm/  231mm FR:=115mm/  122mm R:=357mm/  367mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:311, Y:212, Radius:78}
+Ball seen roughly ahead
+Ball within expected Y range: 140 < 212 < 404
+L:=265mm/  268mm FL:=149mm/  154mm F:=204mm/  218mm FR:=110mm/  115mm R:=332mm/  357mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:310, Y:212, Radius:83}
+Ball seen roughly ahead
+Ball within expected Y range: 134 < 212 < 414
+L:=260mm/  265mm FL:=138mm/  149mm F:=197mm/  204mm FR:=108mm/  110mm R:=325mm/  332mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:313, Y:209, Radius:88}
+Ball seen roughly ahead
+Ball within expected Y range: 127 < 209 < 426
+L:=252mm/  260mm FL:=128mm/  138mm F:=189mm/  197mm FR:=109mm/  109mm R:=311mm/  325mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:313, Y:208, Radius:95}
+Ball seen roughly ahead
+Ball within expected Y range: 122 < 208 < 432
+L:=240mm/  252mm FL:=117mm/  128mm F:=169mm/  189mm FR:=105mm/  108mm R:=267mm/  311mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:312, Y:208, Radius:102}
+Ball seen roughly ahead
+Ball within expected Y range: 118 < 208 < 440
+L:=226mm/  240mm FL:=103mm/  117mm F:=161mm/  169mm FR:= 96mm/  105mm R:=291mm/  291mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:314, Y:206, Radius:112}
+Ball seen roughly ahead
+Ball within expected Y range: 103 < 206 < 464
+L:=207mm/  226mm FL:=102mm/  103mm F:=152mm/  161mm FR:= 88mm/   96mm R:=281mm/  281mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:312, Y:204, Radius:122}
+Ball seen roughly ahead
+Ball within expected Y range: 96 < 204 < 475
+L:=195mm/  207mm FL:= 84mm/  102mm F:=141mm/  152mm FR:= 75mm/   88mm R:=296mm/  291mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:312, Y:201, Radius:134}
+Ball seen roughly ahead
+Ball within expected Y range: 88 < 201 < 489
+L:=201mm/  201mm FL:= 77mm/   84mm F:=137mm/  141mm FR:= 70mm/   75mm R:=266mm/  281mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:307, Y:213, Radius:147}
+Ball seen roughly ahead
+Ball within expected Y range: 76 < 213 < 509
+L:=184mm/  195mm FL:= 65mm/   77mm F:=110mm/  137mm FR:= 69mm/   70mm R:=232mm/  266mm
+Target: blue Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:298, Y:225, Radius:163}
+Ball seen roughly ahead
+Ball within expected Y range: 71 < 225 < 517
+L:=169mm/  184mm FL:= 56mm/   65mm F:=110mm/  110mm FR:= 58mm/   69mm R:=226mm/  232mm
+Target: blue Advancing
+Speeds: FL=-15 FR=-15 BL=-15 BR=-15
+Reached target ball: blue in 23.078269502s
+Next target ball:  yellow
+Not found: didn't find any contours
+L:=157mm/  169mm FL:= 47mm/   56mm F:= 99mm/  110mm FR:= 42mm/   58mm R:=209mm/  226mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=159mm/  159mm FL:= 45mm/   47mm F:=110mm/  110mm FR:= 46mm/   46mm R:=221mm/  221mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=169mm/  159mm FL:= 56mm/   47mm F:=115mm/  110mm FR:= 62mm/   46mm R:=239mm/  221mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=172mm/  169mm FL:= 66mm/   56mm F:=136mm/  115mm FR:= 72mm/   62mm R:=275mm/  239mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=188mm/  172mm FL:= 76mm/   66mm F:=140mm/  136mm FR:= 78mm/   72mm R:=259mm/  259mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=187mm/  187mm FL:= 92mm/   76mm F:=154mm/  140mm FR:= 83mm/   78mm R:=308mm/  275mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=201mm/  188mm FL:= 98mm/   92mm F:=172mm/  154mm FR:= 91mm/   83mm R:=315mm/  308mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=204mm/  201mm FL:=106mm/   98mm F:=168mm/  168mm FR:=102mm/   91mm R:=302mm/  308mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=225mm/  204mm FL:=120mm/  106mm F:=178mm/  172mm FR:=109mm/  102mm R:=327mm/  315mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=235mm/  225mm FL:=129mm/  120mm F:=185mm/  178mm FR:=113mm/  109mm R:=338mm/  327mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=238mm/  235mm FL:=140mm/  129mm F:=209mm/  185mm FR:=115mm/  113mm R:=311mm/  327mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=250mm/  238mm FL:=155mm/  140mm F:=208mm/  208mm FR:=115mm/  115mm R:=401mm/  338mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=256mm/  250mm FL:=165mm/  155mm F:=214mm/  209mm FR:=122mm/  115mm R:=377mm/  377mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=262mm/  256mm FL:=174mm/  165mm F:=224mm/  214mm FR:=124mm/  122mm R:=392mm/  392mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=281mm/  262mm FL:=174mm/  174mm F:=233mm/  224mm FR:=137mm/  124mm R:=386mm/  386mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=285mm/  281mm FL:=193mm/  174mm F:=250mm/  233mm FR:=144mm/  137mm R:=361mm/  386mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=298mm/  285mm FL:=204mm/  193mm F:=239mm/  239mm FR:=149mm/  144mm R:=456mm/  386mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=310mm/  298mm FL:=200mm/  200mm F:=263mm/  250mm FR:=161mm/  149mm R:=410mm/  410mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=305mm/  305mm FL:=211mm/  204mm F:=271mm/  263mm FR:=172mm/  161mm R:=448mm/  448mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=328mm/  310mm FL:=212mm/  211mm F:=298mm/  271mm FR:=181mm/  172mm R:=393mm/  410mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=327mm/  327mm FL:=240mm/  212mm F:=299mm/  298mm FR:=186mm/  181mm R:=402mm/  402mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=332mm/  328mm FL:=239mm/  239mm F:=340mm/  299mm FR:=203mm/  186mm R:=418mm/  402mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=328mm/  328mm FL:=258mm/  240mm F:=290mm/  299mm FR:=204mm/  203mm R:=398mm/  402mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=362mm/  332mm FL:=254mm/  254mm F:=317mm/  317mm FR:=214mm/  204mm R:=430mm/  418mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=347mm/  347mm FL:=267mm/  258mm F:=302mm/  302mm FR:=224mm/  214mm R:=<invalid>/  430mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=382mm/  362mm FL:=266mm/  266mm F:=294mm/  302mm FR:=227mm/  224mm R:=462mm/  462mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=373mm/  373mm FL:=265mm/  266mm F:=352mm/  302mm FR:=229mm/  227mm R:=<invalid>/  462mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=395mm/  382mm FL:=283mm/  266mm F:=379mm/  352mm FR:=237mm/  229mm R:=558mm/  558mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=374mm/  374mm FL:=284mm/  283mm F:=334mm/  352mm FR:=248mm/  237mm R:=521mm/  558mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=390mm/  390mm FL:=298mm/  284mm F:=363mm/  363mm FR:=268mm/  248mm R:=494mm/  521mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=437mm/  390mm FL:=305mm/  298mm F:=402mm/  363mm FR:=266mm/  266mm R:=<invalid>/  521mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=415mm/  415mm FL:=305mm/  305mm F:=387mm/  387mm FR:=271mm/  268mm R:=631mm/  631mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=422mm/  422mm FL:=301mm/  305mm F:=383mm/  387mm FR:=278mm/  271mm R:=<invalid>/  631mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=443mm/  422mm FL:=297mm/  301mm F:=402mm/  387mm FR:=271mm/  271mm R:=602mm/  631mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=455mm/  443mm FL:=295mm/  297mm F:=384mm/  384mm FR:=289mm/  278mm R:=588mm/  602mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=445mm/  445mm FL:=320mm/  297mm F:=392mm/  392mm FR:=286mm/  286mm R:=<invalid>/  602mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=470mm/  455mm FL:=338mm/  320mm F:=410mm/  392mm FR:=307mm/  289mm R:=605mm/  605mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=451mm/  451mm FL:=357mm/  338mm F:=446mm/  410mm FR:=307mm/  307mm R:=<invalid>/  605mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=465mm/  465mm FL:=326mm/  338mm F:=403mm/  410mm FR:=325mm/  307mm R:=<invalid>/  605mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=480mm/  465mm FL:=332mm/  332mm F:=460mm/  446mm FR:=327mm/  325mm R:=629mm/  629mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=452mm/  465mm FL:=358mm/  332mm F:=506mm/  460mm FR:=324mm/  325mm R:=632mm/  632mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=476mm/  476mm FL:=359mm/  358mm F:=414mm/  460mm FR:=322mm/  324mm R:=659mm/  632mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=476mm/  476mm FL:=360mm/  359mm F:=426mm/  426mm FR:=337mm/  324mm R:=624mm/  632mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=487mm/  476mm FL:=367mm/  360mm F:=454mm/  426mm FR:=346mm/  337mm R:=647mm/  647mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=510mm/  487mm FL:=380mm/  367mm F:=506mm/  454mm FR:=350mm/  346mm R:=567mm/  624mm
+Target: yellow Reversing
+Event from joystick: button(2)=1
+Not found: didn't find any contours
+L:=500mm/  500mm FL:=366mm/  367mm F:=439mm/  454mm FR:=355mm/  350mm R:=685mm/  647mm
+Target: yellow Reversing
+TestMode: wrote /tmp/image-1.jpg? true
+Not found: didn't find any contours
+L:=504mm/  504mm FL:=403mm/  380mm F:=521mm/  506mm FR:=371mm/  355mm R:=605mm/  605mm
+Target: yellow Reversing
+Skipping 1 frames
+Event from joystick: button(2)=0
+Not found: didn't find any contours
+L:=536mm/  504mm FL:=399mm/  399mm F:=439mm/  439mm FR:=363mm/  363mm R:=664mm/  664mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=535mm/  535mm FL:=386mm/  399mm F:=495mm/  495mm FR:=363mm/  363mm R:=641mm/  641mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=541mm/  536mm FL:=395mm/  395mm F:=480mm/  480mm FR:=381mm/  363mm R:=647mm/  647mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=534mm/  535mm FL:=408mm/  395mm F:=443mm/  480mm FR:=384mm/  381mm R:=649mm/  647mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=528mm/  534mm FL:=437mm/  408mm F:=475mm/  475mm FR:=389mm/  384mm R:=638mm/  647mm
+Target: yellow Reversing
+Not found: largest contour not wide enough
+L:=585mm/  534mm FL:=422mm/  422mm F:=501mm/  475mm FR:=393mm/  389mm R:=611mm/  638mm
+Target: yellow Reversing
+Not found: largest contour not wide enough
+L:=565mm/  565mm FL:=440mm/  437mm F:=487mm/  487mm FR:=392mm/  392mm R:=601mm/  611mm
+Target: yellow Reversing
+Not found: largest contour not wide enough
+L:=536mm/  565mm FL:=396mm/  422mm F:=459mm/  487mm FR:=406mm/  393mm R:=561mm/  601mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=589mm/  565mm FL:=370mm/  396mm F:=453mm/  459mm FR:=399mm/  399mm R:=570mm/  570mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=495mm/  536mm FL:=416mm/  396mm F:=465mm/  459mm FR:=410mm/  406mm R:=600mm/  570mm
+Target: yellow Reversing
+Not found: largest contour not wide enough
+L:=539mm/  539mm FL:=414mm/  414mm F:=452mm/  453mm FR:=410mm/  410mm R:=543mm/  570mm
+Target: yellow Reversing
+Not found: didn't find any contours
+L:=576mm/  539mm FL:=409mm/  414mm F:=<invalid>/  465mm FR:=400mm/  410mm R:=527mm/  543mm
+Target: yellow Reversing
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=527mm/  539mm FL:=425mm/  414mm F:=480mm/  480mm FR:=430mm/  410mm R:=562mm/  543mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=525mm/  527mm FL:=435mm/  425mm F:=548mm/  548mm FR:=419mm/  419mm R:=<invalid>/  562mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=536mm/  527mm FL:=422mm/  425mm F:=419mm/  480mm FR:=425mm/  425mm R:=545mm/  562mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=553mm/  536mm FL:=409mm/  422mm F:=506mm/  506mm FR:=411mm/  419mm R:=545mm/  545mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=510mm/  536mm FL:=392mm/  409mm F:=487mm/  487mm FR:=427mm/  425mm R:=510mm/  545mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=516mm/  516mm FL:=309mm/  392mm F:=470mm/  487mm FR:=425mm/  425mm R:=497mm/  510mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=506mm/  510mm FL:=451mm/  392mm F:=464mm/  470mm FR:=418mm/  425mm R:=513mm/  510mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=523mm/  516mm FL:=440mm/  440mm F:=<invalid>/  470mm FR:=328mm/  418mm R:=504mm/  504mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=507mm/  507mm FL:=489mm/  451mm F:=450mm/  464mm FR:=346mm/  346mm R:=491mm/  504mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=496mm/  507mm FL:=488mm/  488mm F:=474mm/  474mm FR:=351mm/  346mm R:=536mm/  504mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=495mm/  496mm FL:=440mm/  488mm F:=<invalid>/  474mm FR:=288mm/  346mm R:=550mm/  536mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=499mm/  496mm FL:=410mm/  440mm F:=464mm/  474mm FR:=308mm/  308mm R:=516mm/  536mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Event from joystick: button(2)=1
+Not found: didn't find any contours
+L:=509mm/  499mm FL:=442mm/  440mm F:=463mm/  464mm FR:=313mm/  308mm R:=507mm/  516mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+TestMode: wrote /tmp/image-2.jpg? true
+Not found: didn't find any contours
+L:=541mm/  509mm FL:=412mm/  412mm F:=492mm/  464mm FR:=358mm/  313mm R:=<invalid>/  516mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Event from joystick: button(2)=0
+Not found: didn't find any contours
+L:=590mm/  541mm FL:=430mm/  430mm F:=491mm/  491mm FR:=340mm/  340mm R:=587mm/  587mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Not found: didn't find any contours
+L:=575mm/  575mm FL:=379mm/  412mm F:=561mm/  492mm FR:=321mm/  340mm R:=530mm/  587mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  590mm FL:=402mm/  402mm F:=532mm/  532mm FR:=327mm/  327mm R:=528mm/  530mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  575mm FL:=381mm/  381mm F:=471mm/  532mm FR:=382mm/  327mm R:=512mm/  528mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=391mm/  391mm F:=490mm/  490mm FR:=341mm/  341mm R:=504mm/  512mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=416mm/  391mm F:=501mm/  490mm FR:=340mm/  341mm R:=414mm/  504mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=488mm/  488mm FL:=383mm/  391mm F:=437mm/  490mm FR:=393mm/  341mm R:=420mm/  420mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  488mm FL:=350mm/  383mm F:=422mm/  437mm FR:=375mm/  375mm R:=404mm/  414mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=707mm/  707mm FL:=369mm/  369mm F:=432mm/  432mm FR:=340mm/  375mm R:=414mm/  414mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=607mm/  707mm FL:=402mm/  369mm F:=490mm/  432mm FR:=379mm/  375mm R:=406mm/  406mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  707mm FL:=390mm/  390mm F:=396mm/  432mm FR:=367mm/  367mm R:=394mm/  406mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=530mm/  607mm FL:=443mm/  402mm F:=413mm/  413mm FR:=358mm/  367mm R:=411mm/  406mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=540mm/  540mm FL:=440mm/  440mm F:=424mm/  413mm FR:=349mm/  358mm R:=413mm/  411mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=565mm/  540mm FL:=433mm/  440mm F:=402mm/  413mm FR:=318mm/  349mm R:=420mm/  413mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=595mm/  565mm FL:=412mm/  433mm F:=419mm/  419mm FR:=350mm/  349mm R:=407mm/  413mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=603mm/  595mm FL:=341mm/  412mm F:=464mm/  419mm FR:=367mm/  350mm R:=437mm/  420mm
+Target: yellow Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Found at rainbow.BallPosition{X:13, Y:233, Radius:15}
+L:=547mm/  595mm FL:=384mm/  384mm F:=458mm/  458mm FR:=344mm/  350mm R:=431mm/  431mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:51, Y:234, Radius:27}
+L:=558mm/  558mm FL:=369mm/  369mm F:=459mm/  459mm FR:=373mm/  367mm R:=462mm/  437mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Event from joystick: button(2)=1
+Found at rainbow.BallPosition{X:108, Y:236, Radius:26}
+L:=<invalid>/  558mm FL:=371mm/  371mm F:=415mm/  458mm FR:=375mm/  373mm R:=446mm/  446mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+TestMode: wrote /tmp/image-3.jpg? true
+Found at rainbow.BallPosition{X:141, Y:238, Radius:24}
+L:=639mm/  639mm FL:=347mm/  369mm F:=469mm/  459mm FR:=307mm/  373mm R:=446mm/  446mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Event from joystick: button(2)=0
+Found at rainbow.BallPosition{X:182, Y:238, Radius:24}
+L:=616mm/  639mm FL:=347mm/  347mm F:=432mm/  432mm FR:=340mm/  340mm R:=482mm/  446mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:198, Y:238, Radius:24}
+L:=635mm/  635mm FL:=353mm/  347mm F:=417mm/  432mm FR:=350mm/  340mm R:=436mm/  446mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:231, Y:240, Radius:24}
+L:=<invalid>/  635mm FL:=347mm/  347mm F:=507mm/  432mm FR:=348mm/  348mm R:=447mm/  447mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:247, Y:240, Radius:24}
+Ball seen roughly ahead
+L:=583mm/  635mm FL:=353mm/  353mm F:=462mm/  462mm FR:=340mm/  348mm R:=442mm/  442mm
+Target: yellow Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:262, Y:238, Radius:24}
+Ball seen roughly ahead
+L:=<invalid>/  583mm FL:=352mm/  352mm F:=443mm/  462mm FR:=346mm/  346mm R:=480mm/  447mm
+Target: yellow Rotating
+Target: yellow Advancing
+Speeds: FL=13 FR=16 BL=13 BR=16
+Event from joystick: button(2)=1
+Found at rainbow.BallPosition{X:280, Y:240, Radius:24}
+Ball seen roughly ahead
+L:=585mm/  585mm FL:=353mm/  353mm F:=467mm/  462mm FR:=358mm/  346mm R:=488mm/  480mm
+Target: yellow Advancing
+Speeds: FL=13 FR=16 BL=13 BR=16
+TestMode: wrote /tmp/image-4.jpg? true
+Found at rainbow.BallPosition{X:296, Y:241, Radius:23}
+Ball seen roughly ahead
+L:=733mm/  733mm FL:=365mm/  353mm F:=524mm/  467mm FR:=362mm/  358mm R:=469mm/  480mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Event from joystick: button(2)=0
+Found at rainbow.BallPosition{X:309, Y:241, Radius:25}
+Ball seen roughly ahead
+L:=766mm/  733mm FL:=351mm/  353mm F:=447mm/  467mm FR:=361mm/  361mm R:=501mm/  488mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:309, Y:243, Radius:25}
+Ball seen roughly ahead
+L:=<invalid>/  766mm FL:=342mm/  351mm F:=474mm/  474mm FR:=354mm/  361mm R:=496mm/  496mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:312, Y:242, Radius:26}
+Ball seen roughly ahead
+L:=<invalid>/  766mm FL:=343mm/  343mm F:=461mm/  461mm FR:=338mm/  354mm R:=457mm/  496mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:314, Y:242, Radius:26}
+Ball seen roughly ahead
+L:=610mm/  610mm FL:=324mm/  342mm F:=454mm/  461mm FR:=368mm/  354mm R:=447mm/  457mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:315, Y:242, Radius:26}
+Ball seen roughly ahead
+L:=759mm/  759mm FL:=327mm/  327mm F:=454mm/  454mm FR:=311mm/  338mm R:=419mm/  447mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:315, Y:243, Radius:27}
+Ball seen roughly ahead
+L:=<invalid>/  759mm FL:=317mm/  324mm F:=464mm/  454mm FR:=353mm/  353mm R:=396mm/  419mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:316, Y:244, Radius:28}
+Ball seen roughly ahead
+L:=<invalid>/  759mm FL:=325mm/  325mm F:=438mm/  454mm FR:=365mm/  353mm R:=437mm/  419mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:318, Y:244, Radius:28}
+Ball seen roughly ahead
+L:=<invalid>/    0mm FL:=304mm/  317mm F:=426mm/  438mm FR:=341mm/  353mm R:=456mm/  437mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:321, Y:244, Radius:28}
+Ball seen roughly ahead
+L:=605mm/  605mm FL:=307mm/  307mm F:=433mm/  433mm FR:=334mm/  341mm R:=460mm/  456mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:245, Radius:29}
+Ball seen roughly ahead
+L:=679mm/  679mm FL:=306mm/  306mm F:=456mm/  433mm FR:=335mm/  335mm R:=426mm/  456mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:245, Radius:29}
+Ball seen roughly ahead
+L:=660mm/  660mm FL:=288mm/  306mm F:=406mm/  433mm FR:=314mm/  334mm R:=372mm/  426mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:244, Radius:30}
+Ball seen roughly ahead
+L:=<invalid>/  679mm FL:=291mm/  291mm F:=432mm/  432mm FR:=320mm/  320mm R:=358mm/  372mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:320, Y:245, Radius:31}
+Ball seen roughly ahead
+L:=<invalid>/  660mm FL:=285mm/  288mm F:=432mm/  432mm FR:=310mm/  314mm R:=407mm/  372mm
+Target: yellow Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:317, Y:245, Radius:32}
+Ball seen roughly ahead
+L:=624mm/  624mm FL:=298mm/  291mm F:=418mm/  432mm FR:=299mm/  310mm R:=365mm/  365mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:314, Y:245, Radius:33}
+Ball seen roughly ahead
+L:=<invalid>/  624mm FL:=272mm/  285mm F:=406mm/  418mm FR:=306mm/  306mm R:=380mm/  380mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:315, Y:245, Radius:34}
+Ball seen roughly ahead
+L:=<invalid>/  624mm FL:=277mm/  277mm F:=407mm/  407mm FR:=311mm/  306mm R:=362mm/  365mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:315, Y:246, Radius:34}
+Ball seen roughly ahead
+L:=626mm/  626mm FL:=258mm/  272mm F:=430mm/  407mm FR:=307mm/  307mm R:=383mm/  380mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Event from joystick: button(2)=1
+Found at rainbow.BallPosition{X:316, Y:246, Radius:35}
+Ball seen roughly ahead
+L:=<invalid>/  626mm FL:=248mm/  258mm F:=396mm/  407mm FR:=300mm/  307mm R:=344mm/  362mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+TestMode: wrote /tmp/image-5.jpg? true
+Found at rainbow.BallPosition{X:315, Y:246, Radius:37}
+Ball seen roughly ahead
+Ball within expected Y range: 183 < 246 < 333
+L:=<invalid>/  626mm FL:=230mm/  248mm F:=379mm/  396mm FR:=279mm/  300mm R:=382mm/  382mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Event from joystick: button(2)=0
+Found at rainbow.BallPosition{X:318, Y:248, Radius:39}
+Ball seen roughly ahead
+Ball within expected Y range: 181 < 248 < 335
+L:=<invalid>/    0mm FL:=245mm/  245mm F:=351mm/  379mm FR:=259mm/  279mm R:=319mm/  344mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:318, Y:247, Radius:40}
+Ball seen roughly ahead
+Ball within expected Y range: 179 < 247 < 340
+L:=<invalid>/    0mm FL:=234mm/  234mm F:=356mm/  356mm FR:=267mm/  267mm R:=369mm/  369mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Found at rainbow.BallPosition{X:324, Y:250, Radius:43}
+Ball seen roughly ahead
+Ball within expected Y range: 175 < 250 < 346
+L:=625mm/  625mm FL:=217mm/  234mm F:=335mm/  351mm FR:=244mm/  259mm R:=339mm/  339mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:323, Y:250, Radius:44}
+Ball seen roughly ahead
+Ball within expected Y range: 174 < 250 < 348
+L:=504mm/  625mm FL:=222mm/  222mm F:=321mm/  335mm FR:=252mm/  252mm R:=318mm/  339mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:324, Y:250, Radius:47}
+Ball seen roughly ahead
+Ball within expected Y range: 171 < 250 < 353
+L:=452mm/  504mm FL:=210mm/  217mm F:=310mm/  321mm FR:=237mm/  244mm R:=291mm/  318mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:252, Radius:49}
+Ball seen roughly ahead
+Ball within expected Y range: 168 < 252 < 358
+L:=<invalid>/  504mm FL:=192mm/  210mm F:=299mm/  310mm FR:=234mm/  237mm R:=317mm/  317mm
+Target: yellow Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:319, Y:253, Radius:50}
+Ball seen roughly ahead
+Ball within expected Y range: 165 < 253 < 362
+L:=<invalid>/  452mm FL:=188mm/  192mm F:=313mm/  310mm FR:=213mm/  234mm R:=309mm/  309mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:317, Y:254, Radius:51}
+Ball seen roughly ahead
+Ball within expected Y range: 165 < 254 < 362
+L:=<invalid>/    0mm FL:=180mm/  188mm F:=289mm/  299mm FR:=217mm/  217mm R:=299mm/  309mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:316, Y:256, Radius:54}
+Ball seen roughly ahead
+Ball within expected Y range: 162 < 256 < 366
+L:=<invalid>/    0mm FL:=180mm/  180mm F:=293mm/  293mm FR:=206mm/  213mm R:=262mm/  299mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:314, Y:256, Radius:56}
+Ball seen roughly ahead
+Ball within expected Y range: 161 < 256 < 369
+L:=462mm/  462mm FL:=165mm/  180mm F:=281mm/  289mm FR:=204mm/  206mm R:=295mm/  295mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:315, Y:258, Radius:59}
+Ball seen roughly ahead
+Ball within expected Y range: 160 < 258 < 371
+L:=<invalid>/  462mm FL:=171mm/  171mm F:=244mm/  281mm FR:=185mm/  204mm R:=285mm/  285mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:318, Y:258, Radius:61}
+Ball seen roughly ahead
+Ball within expected Y range: 157 < 258 < 375
+L:=466mm/  466mm FL:=155mm/  165mm F:=251mm/  251mm FR:=176mm/  185mm R:=263mm/  285mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:320, Y:259, Radius:65}
+Ball seen roughly ahead
+Ball within expected Y range: 148 < 259 < 391
+L:=393mm/  466mm FL:=148mm/  155mm F:=231mm/  244mm FR:=180mm/  180mm R:=258mm/  263mm
+Target: yellow Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:320, Y:260, Radius:68}
+Ball seen roughly ahead
+Ball within expected Y range: 145 < 260 < 395
+L:=455mm/  455mm FL:=148mm/  148mm F:=231mm/  231mm FR:=170mm/  176mm R:=283mm/  263mm
+Target: yellow Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:320, Y:263, Radius:71}
+Ball seen roughly ahead
+Ball within expected Y range: 140 < 263 < 404
+L:=430mm/  430mm FL:=141mm/  148mm F:=245mm/  231mm FR:=162mm/  170mm R:=250mm/  258mm
+Target: yellow Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:320, Y:266, Radius:77}
+Ball seen roughly ahead
+Ball within expected Y range: 140 < 266 < 404
+L:=357mm/  430mm FL:=118mm/  141mm F:=210mm/  231mm FR:=158mm/  162mm R:=238mm/  250mm
+Target: yellow Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:320, Y:271, Radius:83}
+Ball seen roughly ahead
+Ball within expected Y range: 140 < 271 < 404
+L:=379mm/  379mm FL:=124mm/  124mm F:=196mm/  210mm FR:=156mm/  158mm R:=228mm/  238mm
+Target: yellow Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:317, Y:276, Radius:90}
+Ball seen roughly ahead
+Ball within expected Y range: 130 < 276 < 420
+L:=315mm/  357mm FL:=115mm/  118mm F:=197mm/  197mm FR:=142mm/  156mm R:=218mm/  228mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:316, Y:280, Radius:98}
+Ball seen roughly ahead
+Ball within expected Y range: 122 < 280 < 432
+L:=294mm/  315mm FL:=108mm/  115mm F:=192mm/  196mm FR:=127mm/  142mm R:=219mm/  219mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:310, Y:294, Radius:104}
+Ball seen roughly ahead
+Ball within expected Y range: 122 < 294 < 433
+L:=301mm/  301mm FL:=101mm/  108mm F:=171mm/  192mm FR:=124mm/  127mm R:=212mm/  218mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:306, Y:310, Radius:116}
+Ball seen roughly ahead
+Ball within expected Y range: 119 < 310 < 437
+L:=298mm/  298mm FL:= 88mm/  101mm F:=166mm/  171mm FR:=124mm/  124mm R:=185mm/  212mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:306, Y:324, Radius:129}
+Ball seen roughly ahead
+Ball within expected Y range: 105 < 324 < 462
+L:=264mm/  298mm FL:= 79mm/   88mm F:=157mm/  166mm FR:=112mm/  124mm R:=187mm/  187mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:304, Y:338, Radius:143}
+Ball seen roughly ahead
+Ball within expected Y range: 101 < 338 < 468
+L:=282mm/  282mm FL:= 69mm/   79mm F:=146mm/  157mm FR:= 94mm/  112mm R:=170mm/  185mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:300, Y:336, Radius:154}
+Ball seen roughly ahead
+Ball within expected Y range: 93 < 336 < 481
+L:=230mm/  264mm FL:= 65mm/   69mm F:=129mm/  146mm FR:= 91mm/   94mm R:=175mm/  175mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:297, Y:334, Radius:166}
+Ball seen roughly ahead
+Ball within expected Y range: 82 < 334 < 500
+L:=245mm/  245mm FL:= 50mm/   65mm F:=131mm/  131mm FR:= 79mm/   91mm R:=164mm/  170mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:301, Y:330, Radius:185}
+Ball seen roughly ahead
+Ball within expected Y range: 64 < 330 < 529
+L:=217mm/  230mm FL:= 25mm/   50mm F:=118mm/  129mm FR:= 67mm/   79mm R:=151mm/  164mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:289, Y:326, Radius:212}
+Ball seen roughly ahead
+Ball within expected Y range: 61 < 326 < 534
+L:=194mm/  217mm FL:= 15mm/   25mm F:=104mm/  118mm FR:= 55mm/   67mm R:=145mm/  151mm
+Target: yellow Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:308, Y:322, Radius:233}
+Ball seen roughly ahead
+Ball within expected Y range: 44 < 322 < 561
+L:=164mm/  194mm FL:= 18mm/   18mm F:=102mm/  104mm FR:= 35mm/   55mm R:=145mm/  145mm
+Target: yellow Advancing
+Speeds: FL=-15 FR=-15 BL=-15 BR=-15
+Reached target ball: yellow in 33.552643791s
+Next target ball:  green
+Not found: didn't find any contours
+L:=142mm/  164mm FL:= 24mm/   18mm F:= 80mm/  102mm FR:= 38mm/   38mm R:=129mm/  145mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=146mm/  146mm FL:= 25mm/   24mm F:= 81mm/   81mm FR:= 20mm/   35mm R:=136mm/  136mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=130mm/  142mm FL:= 15mm/   24mm F:= 92mm/   81mm FR:= 26mm/   26mm R:=144mm/  136mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=178mm/  146mm FL:= 24mm/   24mm F:=110mm/   92mm FR:= 48mm/   26mm R:=151mm/  144mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=187mm/  178mm FL:= 37mm/   24mm F:=111mm/  110mm FR:= 67mm/   48mm R:=173mm/  151mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=217mm/  187mm FL:= 47mm/   37mm F:=126mm/  111mm FR:= 78mm/   67mm R:=173mm/  173mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=234mm/  217mm FL:= 60mm/   47mm F:=134mm/  126mm FR:= 93mm/   78mm R:=187mm/  173mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=242mm/  234mm FL:= 72mm/   60mm F:=149mm/  134mm FR:=104mm/   93mm R:=200mm/  187mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=266mm/  242mm FL:= 81mm/   72mm F:=165mm/  149mm FR:=113mm/  104mm R:=195mm/  195mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=256mm/  256mm FL:= 91mm/   81mm F:=169mm/  165mm FR:=118mm/  113mm R:=220mm/  200mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=308mm/  266mm FL:= 98mm/   91mm F:=175mm/  169mm FR:=121mm/  118mm R:=229mm/  220mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=306mm/  306mm FL:=109mm/   98mm F:=187mm/  175mm FR:=131mm/  121mm R:=242mm/  229mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=290mm/  306mm FL:=117mm/  109mm F:=192mm/  187mm FR:=139mm/  131mm R:=241mm/  241mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=344mm/  306mm FL:=127mm/  117mm F:=210mm/  192mm FR:=144mm/  139mm R:=273mm/  242mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=347mm/  344mm FL:=129mm/  127mm F:=206mm/  206mm FR:=152mm/  144mm R:=267mm/  267mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=336mm/  344mm FL:=146mm/  129mm F:=241mm/  210mm FR:=174mm/  152mm R:=282mm/  273mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=358mm/  347mm FL:=151mm/  146mm F:=242mm/  241mm FR:=169mm/  169mm R:=300mm/  282mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=368mm/  358mm FL:=157mm/  151mm F:=236mm/  241mm FR:=171mm/  171mm R:=284mm/  284mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=426mm/  368mm FL:=166mm/  157mm F:=243mm/  242mm FR:=194mm/  171mm R:=311mm/  300mm
+Target: green Reversing
+Event from joystick: button(2)=1
+Not found: didn't find any contours
+L:=<invalid>/  426mm FL:=164mm/  164mm F:=273mm/  243mm FR:=190mm/  190mm R:=332mm/  311mm
+Target: green Reversing
+TestMode: wrote /tmp/image-6.jpg? true
+Not found: didn't find any contours
+L:=350mm/  426mm FL:=181mm/  166mm F:=297mm/  273mm FR:=196mm/  194mm Event from joystick: button(2)=0
+R:=306mm/  311mm
+Target: green Reversing
+Skipping 1 frames
+Not found: largest contour not wide enough
+L:=449mm/  449mm FL:=184mm/  181mm F:=285mm/  285mm FR:=197mm/  196mm R:=345mm/  332mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  449mm FL:=196mm/  184mm F:=330mm/  297mm FR:=219mm/  197mm R:=345mm/  345mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  449mm FL:=202mm/  196mm F:=305mm/  305mm FR:=216mm/  216mm R:=369mm/  345mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=490mm/  490mm FL:=202mm/  202mm F:=341mm/  330mm FR:=226mm/  219mm R:=362mm/  362mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=494mm/  494mm FL:=231mm/  202mm F:=296mm/  305mm FR:=218mm/  218mm R:=327mm/  362mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=490mm/  490mm FL:=226mm/  226mm F:=343mm/  341mm FR:=249mm/  226mm R:=390mm/  362mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=458mm/  490mm FL:=237mm/  231mm F:=325mm/  325mm FR:=238mm/  238mm R:=414mm/  390mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=<invalid>/  490mm FL:=230mm/  230mm F:=339mm/  339mm FR:=248mm/  248mm R:=359mm/  390mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  458mm FL:=249mm/  237mm F:=384mm/  339mm FR:=274mm/  248mm R:=345mm/  359mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=262mm/  249mm F:=350mm/  350mm FR:=280mm/  274mm R:=386mm/  359mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=590mm/  590mm FL:=265mm/  262mm F:=369mm/  369mm FR:=294mm/  280mm R:=394mm/  386mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=605mm/  605mm FL:=261mm/  262mm F:=372mm/  369mm FR:=268mm/  280mm R:=446mm/  394mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  605mm FL:=281mm/  265mm F:=373mm/  372mm FR:=279mm/  279mm R:=383mm/  394mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  605mm FL:=280mm/  280mm F:=402mm/  373mm FR:=278mm/  278mm R:=443mm/  443mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=277mm/  280mm F:=428mm/  402mm FR:=293mm/  279mm R:=468mm/  443mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=663mm/  663mm FL:=320mm/  280mm F:=421mm/  421mm FR:=292mm/  292mm R:=405mm/  443mm
+Target: green Reversing
+Not found: largest contour not wide enough
+L:=590mm/  663mm FL:=305mm/  305mm F:=387mm/  421mm FR:=304mm/  293mm R:=<invalid>/  468mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  663mm FL:=306mm/  306mm F:=394mm/  394mm FR:=318mm/  304mm R:=486mm/  486mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  590mm FL:=320mm/  306mm F:=395mm/  394mm FR:=322mm/  318mm R:=463mm/  486mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm FL:=331mm/  320mm F:=449mm/  395mm FR:=333mm/  322mm R:=491mm/  486mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/    0mm Event from joystick: button(2)=1
+FL:=316mm/  320mm F:=439mm/  439mm FR:=327mm/  327mm R:=496mm/  491mm
+Target: green Reversing
+TestMode: wrote /tmp/image-7.jpg? true
+Not found: didn't find any contours
+L:=627mm/  627mm FL:=338mm/  331mm F:=434mm/  439mm FR:=360mm/  333mm R:=461mm/  491mm
+Target: green Reversing
+Skipping 1 frames
+Event from joystick: button(2)=0
+Not found: didn't find any contours
+L:=761mm/  761mm FL:=338mm/  338mm F:=436mm/  436mm FR:=346mm/  346mm R:=522mm/  496mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=564mm/  627mm FL:=347mm/  338mm F:=449mm/  436mm FR:=346mm/  346mm R:=743mm/  522mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  761mm FL:=352mm/  347mm F:=472mm/  449mm FR:=335mm/  346mm R:=533mm/  533mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=609mm/  609mm FL:=365mm/  352mm F:=462mm/  462mm FR:=349mm/  346mm R:=547mm/  547mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  609mm FL:=366mm/  365mm F:=441mm/  462mm FR:=338mm/  338mm R:=525mm/  533mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=547mm/  609mm FL:=364mm/  365mm F:=488mm/  462mm FR:=334mm/  338mm R:=503mm/  525mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=553mm/  553mm FL:=359mm/  364mm F:=484mm/  484mm FR:=336mm/  336mm R:=522mm/  522mm
+Target: green Reversing
+Not found: didn't find any contours
+L:=<invalid>/  553mm FL:=388mm/  364mm F:=503mm/  488mm FR:=313mm/  334mm R:=581mm/  522mm
+Target: green Reversing
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=715mm/  715mm FL:=367mm/  367mm F:=475mm/  484mm FR:=359mm/  336mm R:=565mm/  565mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  715mm FL:=370mm/  370mm F:=418mm/  475mm FR:=363mm/  359mm R:=518mm/  565mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  715mm FL:=368mm/  368mm F:=481mm/  475mm FR:=410mm/  363mm R:=542mm/  542mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=593mm/  593mm FL:=370mm/  370mm F:=428mm/  428mm FR:=365mm/  365mm R:=544mm/  542mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: largest contour not wide enough
+L:=518mm/  593mm FL:=377mm/  370mm F:=385mm/  428mm FR:=351mm/  365mm R:=521mm/  542mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=671mm/  593mm FL:=387mm/  377mm F:=379mm/  385mm FR:=345mm/  351mm R:=529mm/  529mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: largest contour not wide enough
+L:=483mm/  518mm FL:=395mm/  387mm F:=430mm/  385mm FR:=346mm/  346mm R:=540mm/  529mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=<invalid>/  671mm FL:=365mm/  387mm F:=456mm/  430mm FR:=359mm/  346mm R:=538mm/  538mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=599mm/  599mm FL:=362mm/  365mm F:=376mm/  430mm FR:=365mm/  359mm R:=526mm/  538mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=468mm/  599mm FL:=379mm/  365mm F:=418mm/  418mm FR:=330mm/  359mm R:=514mm/  526mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=543mm/  543mm FL:=390mm/  379mm F:=400mm/  400mm FR:=393mm/  365mm R:=501mm/  514mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=478mm/  478mm FL:=445mm/  390mm F:=382mm/  400mm Event from joystick: button(2)=1
+FR:=360mm/  360mm R:=530mm/  514mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+TestMode: wrote /tmp/image-8.jpg? true
+Not found: didn't find any contours
+L:=511mm/  511mm FL:=427mm/  427mm F:=412mm/  400mm FR:=360mm/  360mm R:=524mm/  524mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Skipping 1 frames
+Event from joystick: button(2)=0
+Not found: didn't find any contours
+L:=462mm/  478mm FL:=430mm/  430mm F:=402mm/  402mm FR:=329mm/  360mm R:=537mm/  530mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: largest contour not wide enough
+L:=548mm/  511mm FL:=461mm/  430mm F:=416mm/  412mm FR:=317mm/  329mm R:=534mm/  534mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Not found: didn't find any contours
+L:=471mm/  471mm FL:=470mm/  461mm F:=414mm/  414mm FR:=313mm/  317mm R:=543mm/  537mm
+Target: green Rotating
+Speeds: FL=-15 FR=15 BL=-15 BR=15
+Found at rainbow.BallPosition{X:26, Y:243, Radius:30}
+L:=531mm/  531mm FL:=452mm/  461mm F:=392mm/  414mm FR:=349mm/  317mm R:=546mm/  543mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:64, Y:249, Radius:40}
+L:=551mm/  531mm FL:=481mm/  470mm F:=441mm/  414mm FR:=371mm/  349mm R:=583mm/  546mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Event from joystick: button(2)=1
+Found at rainbow.BallPosition{X:117, Y:256, Radius:41}
+L:=538mm/  538mm FL:=457mm/  457mm F:=453mm/  441mm FR:=350mm/  350mm R:=624mm/  583mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+TestMode: wrote /tmp/image-9.jpg? true
+Event from joystick: button(2)=0
+Found at rainbow.BallPosition{X:153, Y:257, Radius:35}
+L:=518mm/  538mm FL:=460mm/  460mm F:=441mm/  441mm FR:=347mm/  350mm R:=587mm/  587mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Skipping 1 frames
+Found at rainbow.BallPosition{X:186, Y:252, Radius:33}
+L:=560mm/  538mm FL:=450mm/  457mm F:=424mm/  441mm FR:=352mm/  350mm R:=548mm/  587mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:204, Y:256, Radius:35}
+L:=546mm/  546mm FL:=457mm/  457mm F:=460mm/  441mm FR:=345mm/  347mm R:=532mm/  548mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:224, Y:258, Radius:33}
+L:=600mm/  560mm FL:=431mm/  450mm F:=420mm/  424mm FR:=356mm/  352mm R:=<invalid>/  548mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:236, Y:254, Radius:33}
+L:=589mm/  589mm FL:=445mm/  445mm F:=434mm/  434mm FR:=367mm/  356mm R:=616mm/  616mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:255, Y:252, Radius:33}
+Ball seen roughly ahead
+L:=8191mm/  600mm FL:=447mm/  445mm F:=470mm/  434mm FR:=347mm/  356mm R:=587mm/  616mm
+Target: green Rotating
+Speeds: FL=-5 FR=5 BL=-5 BR=5
+Found at rainbow.BallPosition{X:267, Y:254, Radius:33}
+Ball seen roughly ahead
+L:=607mm/  607mm FL:=445mm/  445mm F:=403mm/  434mm FR:=340mm/  347mm R:=<invalid>/  616mm
+Target: green Rotating
+Target: green Advancing
+Speeds: FL=13 FR=16 BL=13 BR=16
+Found at rainbow.BallPosition{X:286, Y:256, Radius:35}
+Ball seen roughly ahead
+L:=646mm/  646mm FL:=438mm/  445mm F:=463mm/  463mm FR:=341mm/  341mm R:=558mm/  587mm
+Target: green Advancing
+Speeds: FL=13 FR=16 BL=13 BR=16
+Found at rainbow.BallPosition{X:303, Y:257, Radius:34}
+Ball seen roughly ahead
+L:=615mm/  615mm FL:=455mm/  445mm F:=458mm/  458mm FR:=361mm/  341mm R:=581mm/  581mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:318, Y:257, Radius:32}
+Ball seen roughly ahead
+L:=<invalid>/  646mm FL:=434mm/  438mm F:=432mm/  458mm FR:=336mm/  341mm R:=565mm/  565mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Event from joystick: button(2)=1
+Found at rainbow.BallPosition{X:319, Y:257, Radius:33}
+Ball seen roughly ahead
+L:=656mm/  656mm FL:=432mm/  434mm F:=421mm/  432mm FR:=354mm/  354mm R:=536mm/  565mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+TestMode: wrote /tmp/image-10.jpg? true
+Found at rainbow.BallPosition{X:321, Y:258, Radius:36}
+Ball seen roughly ahead
+L:=540mm/  656mm FL:=426mm/  432mm Event from joystick: button(2)=0
+F:=430mm/  430mm FR:=353mm/  353mm R:=570mm/  565mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:326, Y:258, Radius:34}
+Ball seen roughly ahead
+L:=<invalid>/  656mm FL:=410mm/  426mm F:=416mm/  421mm FR:=345mm/  353mm R:=551mm/  551mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:324, Y:258, Radius:37}
+Ball seen roughly ahead
+L:=<invalid>/  540mm FL:=399mm/  410mm F:=465mm/  430mm FR:=333mm/  345mm R:=573mm/  570mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:260, Radius:37}
+Ball seen roughly ahead
+L:=703mm/  703mm FL:=408mm/  408mm F:=424mm/  424mm FR:=335mm/  335mm R:=562mm/  562mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:320, Y:258, Radius:39}
+Ball seen roughly ahead
+L:=612mm/  703mm FL:=409mm/  408mm F:=419mm/  424mm FR:=316mm/  333mm R:=566mm/  566mm
+Target: green Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:317, Y:260, Radius:38}
+Ball seen roughly ahead
+L:=<invalid>/  703mm FL:=386mm/  408mm F:=395mm/  419mm FR:=308mm/  316mm R:=528mm/  562mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:318, Y:261, Radius:39}
+Ball seen roughly ahead
+Ball within expected Y range: 184 < 261 < 330
+L:=519mm/  612mm FL:=363mm/  386mm F:=407mm/  407mm FR:=302mm/  308mm R:=558mm/  558mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:319, Y:261, Radius:40}
+Ball seen roughly ahead
+L:=<invalid>/  519mm FL:=378mm/  378mm F:=389mm/  395mm FR:=292mm/  302mm R:=580mm/  558mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:316, Y:263, Radius:42}
+Ball seen roughly ahead
+Ball within expected Y range: 181 < 263 < 336
+L:=497mm/  519mm FL:=356mm/  363mm F:=393mm/  393mm FR:=301mm/  301mm R:=<invalid>/  580mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:320, Y:263, Radius:42}
+Ball seen roughly ahead
+Ball within expected Y range: 181 < 263 < 336
+L:=473mm/  497mm FL:=354mm/  356mm F:=367mm/  389mm FR:=305mm/  301mm R:=522mm/  580mm
+Target: green Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:320, Y:264, Radius:42}
+Ball seen roughly ahead
+Ball within expected Y range: 180 < 264 < 337
+L:=486mm/  486mm FL:=330mm/  354mm F:=386mm/  386mm FR:=308mm/  305mm R:=523mm/  523mm
+Target: green Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:326, Y:265, Radius:45}
+Ball seen roughly ahead
+Ball within expected Y range: 180 < 265 < 338
+L:=<invalid>/  486mm FL:=332mm/  332mm F:=369mm/  369mm FR:=304mm/  305mm R:=466mm/  522mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:322, Y:266, Radius:44}
+Ball seen roughly ahead
+Ball within expected Y range: 177 < 266 < 342
+L:=<invalid>/  486mm FL:=316mm/  330mm F:=360mm/  369mm FR:=283mm/  304mm R:=577mm/  523mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:320, Y:269, Radius:46}
+Ball seen roughly ahead
+Ball within expected Y range: 177 < 269 < 342
+L:=508mm/  508mm FL:=323mm/  323mm F:=370mm/  369mm FR:=279mm/  283mm R:=494mm/  494mm
+Target: green Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:320, Y:266, Radius:50}
+Ball seen roughly ahead
+Ball within expected Y range: 177 < 266 < 342
+L:=577mm/  577mm FL:=312mm/  316mm F:=360mm/  360mm FR:=270mm/  279mm R:=537mm/  537mm
+Target: green Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:316, Y:270, Radius:51}
+Ball seen roughly ahead
+Ball within expected Y range: 175 < 270 < 345
+L:=467mm/  508mm FL:=291mm/  312mm F:=343mm/  360mm FR:=248mm/  270mm R:=528mm/  528mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:309, Y:274, Radius:54}
+Ball seen roughly ahead
+Ball within expected Y range: 175 < 274 < 345
+L:=535mm/  535mm FL:=298mm/  298mm F:=322mm/  343mm FR:=249mm/  249mm R:=479mm/  528mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:310, Y:276, Radius:56}
+Ball seen roughly ahead
+Ball within expected Y range: 172 < 276 < 350
+L:=<invalid>/  535mm FL:=287mm/  291mm F:=334mm/  334mm FR:=246mm/  248mm R:=502mm/  502mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:286, Y:295, Radius:78}
+Ball seen roughly ahead
+Ball within expected Y range: 170 < 295 < 353
+L:=396mm/  535mm FL:=278mm/  287mm F:=315mm/  322mm FR:=262mm/  249mm R:=527mm/  502mm
+Target: green Advancing
+Speeds: FL=13 FR=16 BL=13 BR=16
+Found at rainbow.BallPosition{X:274, Y:308, Radius:91}
+Ball seen roughly ahead
+Ball within expected Y range: 168 < 308 < 357
+L:=402mm/  402mm FL:=272mm/  278mm F:=309mm/  315mm FR:=236mm/  246mm R:=480mm/  502mm
+Target: green Advancing
+Speeds: FL=13 FR=16 BL=13 BR=16
+Found at rainbow.BallPosition{X:318, Y:276, Radius:59}
+Ball seen roughly ahead
+Ball within expected Y range: 166 < 276 < 360
+L:=407mm/  402mm FL:=262mm/  272mm F:=291mm/  309mm FR:=231mm/  236mm R:=499mm/  499mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:320, Y:279, Radius:62}
+Ball seen roughly ahead
+Ball within expected Y range: 165 < 279 < 362
+L:=370mm/  402mm FL:=250mm/  262mm F:=284mm/  291mm FR:=231mm/  231mm R:=514mm/  499mm
+Target: green Advancing
+Speeds: FL=15 FR=15 BL=15 BR=15
+Found at rainbow.BallPosition{X:324, Y:280, Radius:64}
+Ball seen roughly ahead
+Ball within expected Y range: 160 < 280 < 370
+L:=350mm/  370mm FL:=247mm/  250mm F:=279mm/  284mm FR:=227mm/  231mm R:=484mm/  499mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:332, Y:282, Radius:63}
+Ball seen roughly ahead
+Ball within expected Y range: 158 < 282 < 373
+L:=386mm/  370mm FL:=239mm/  247mm F:=260mm/  279mm FR:=239mm/  231mm R:=483mm/  484mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:329, Y:285, Radius:68}
+Ball seen roughly ahead
+Ball within expected Y range: 157 < 285 < 376
+L:=366mm/  366mm FL:=231mm/  239mm F:=269mm/  269mm FR:=214mm/  227mm R:=451mm/  483mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:324, Y:277, Radius:66}
+Ball seen roughly ahead
+Ball within expected Y range: 154 < 277 < 381
+L:=375mm/  375mm FL:=216mm/  231mm F:=266mm/  266mm FR:=192mm/  214mm R:=451mm/  451mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Event from joystick: button(2)=1
+Found at rainbow.BallPosition{X:324, Y:293, Radius:75}
+Ball seen roughly ahead
+Ball within expected Y range: 153 < 293 < 382
+L:=358mm/  366mm FL:=207mm/  216mm F:=241mm/  266mm FR:=191mm/  192mm R:=424mm/  451mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+TestMode: wrote /tmp/image-11.jpg? true
+Found at rainbow.BallPosition{X:316, Y:281, Radius:71}
+Ball seen roughly ahead
+Ball within expected Y range: 153 < 281 < 382
+L:=329mm/  358mm FL:=200mm/  207mm F:=261mm/  261mm FR:=186mm/  191mm R:=443mm/  443mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Skipping 1 frames
+Event from joystick: button(2)=0
+Found at rainbow.BallPosition{X:316, Y:287, Radius:77}
+Ball seen roughly ahead
+Ball within expected Y range: 151 < 287 < 385
+L:=313mm/  329mm FL:=184mm/  200mm F:=231mm/  241mm FR:=167mm/  186mm R:=387mm/  424mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:270, Y:345, Radius:131}
+Ball seen roughly ahead
+Ball within expected Y range: 144 < 345 < 397
+L:=345mm/  329mm FL:=172mm/  184mm F:=218mm/  231mm FR:=167mm/  167mm R:=384mm/  387mm
+Target: green Advancing
+Speeds: FL=13 FR=16 BL=13 BR=16
+Found at rainbow.BallPosition{X:318, Y:294, Radius:87}
+Ball seen roughly ahead
+Ball within expected Y range: 140 < 294 < 404
+L:=352mm/  345mm FL:=164mm/  172mm F:=197mm/  218mm FR:=151mm/  167mm R:=376mm/  384mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:312, Y:299, Radius:97}
+Ball seen roughly ahead
+Ball within expected Y range: 134 < 299 < 414
+L:=309mm/  345mm FL:=155mm/  164mm F:=206mm/  206mm FR:=141mm/  151mm R:=346mm/  376mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:324, Y:306, Radius:98}
+Ball seen roughly ahead
+Ball within expected Y range: 128 < 306 < 424
+L:=258mm/  309mm FL:=147mm/  155mm F:=189mm/  197mm FR:=132mm/  141mm R:=339mm/  346mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:324, Y:311, Radius:107}
+Ball seen roughly ahead
+Ball within expected Y range: 122 < 311 < 432
+L:=275mm/  275mm FL:=124mm/  147mm F:=177mm/  189mm FR:=120mm/  132mm R:=334mm/  339mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:305, Y:327, Radius:138}
+Ball seen roughly ahead
+Ball within expected Y range: 118 < 327 < 440
+L:=250mm/  258mm FL:=102mm/  124mm F:=158mm/  177mm FR:=104mm/  120mm R:=340mm/  339mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:323, Y:336, Radius:140}
+Ball seen roughly ahead
+Ball within expected Y range: 109 < 336 < 454
+L:=264mm/  264mm FL:= 96mm/  102mm F:=144mm/  158mm FR:= 98mm/  104mm R:=306mm/  334mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Skipping 1 frames
+Found at rainbow.BallPosition{X:332, Y:348, Radius:150}
+Ball seen roughly ahead
+Ball within expected Y range: 94 < 348 < 480
+L:=228mm/  250mm FL:= 81mm/   96mm F:=131mm/  144mm FR:= 90mm/   98mm R:=264mm/  306mm
+Target: green Advancing
+Speeds: FL=15 FR=14 BL=15 BR=14
+Found at rainbow.BallPosition{X:309, Y:352, Radius:173}
+Ball seen roughly ahead
+Ball within expected Y range: 79 < 352 < 503
+L:=241mm/  241mm FL:= 71mm/   81mm F:=114mm/  131mm FR:= 72mm/   90mm R:=252mm/  264mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:304, Y:356, Radius:186}
+Ball seen roughly ahead
+Ball within expected Y range: 64 < 356 < 529
+L:=210mm/  228mm FL:= 63mm/   71mm F:=103mm/  114mm FR:= 69mm/   72mm R:=245mm/  252mm
+Target: green Advancing
+Speeds: FL=14 FR=15 BL=14 BR=15
+Found at rainbow.BallPosition{X:309, Y:345, Radius:208}
+Ball seen roughly ahead
+Ball within expected Y range: 37 < 345 < 573
+L:=198mm/  210mm FL:= 48mm/   63mm F:= 91mm/  103mm FR:= 60mm/   69mm R:=238mm/  245mm
+Target: green Advancing
+Speeds: FL=-15 FR=-15 BL=-15 BR=-15
+Reached target ball: green in 42.263157929s
+Done!!
+Exiting sequence loop

@@ -1,0 +1,52 @@
+fps: 15
+rotatespeed: 16
+slowrotatespeed: 5
+limitspeed: 80
+forwardspeed: 35
+forwardslowspeed: 6
+xstraightahead: 320
+xplusorminus: 80
+directionadjustfactor: 0.03
+closeenoughsize: 150
+sequence:
+- red
+- blue
+- yellow
+- green
+balls:
+  blue:
+    huemin: 100
+    huemax: 120
+    satmin: 90
+    satmax: 255
+    valmin: 80
+    valmax: 255
+  green:
+    huemin: 45
+    huemax: 100
+    satmin: 10
+    satmax: 255
+    valmin: 0
+    valmax: 255
+  red:
+    huemin: 165
+    huemax: 10
+    satmin: 100
+    satmax: 255
+    valmin: 60
+    valmax: 255
+  yellow:
+    huemin: 22
+    huemax: 42
+    satmin: 100
+    satmax: 255
+    valmin: 130
+    valmax: 255
+forwardcornerdetectionthreshold: 120
+forwardlrcornerdetectionthreshold: 78
+cornerslowdownthresh: 60
+forwardreversethreshold: 450
+deltahminmm: -28
+deltahmaxmm: 17
+tantheta: 0.177
+filterycoord: false
